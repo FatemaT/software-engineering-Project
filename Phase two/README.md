@@ -4,13 +4,14 @@ Phase Two
 
 Team Members: 
 
-Fatema Alteneiji
+	Fatema Alteneiji
 
-Mousa Hana
+	Mousa Hana
 
-Ernesto Garcia
+	Ernesto Garcia
 
-Chethan Appaji
+	Chethan Appaji
 
-Saurabh Tiwari
+	Saurabh Tiwari
+
 
