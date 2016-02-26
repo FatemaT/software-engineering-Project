@@ -1,0 +1,12 @@
+From what we discussed on our first meeting was:
+1- The overall architecture that we are going to Follow ie, Host server APIs, Database, UI server and design.
+2- The requirements that we came up with.
+	1. Nearby Restaurants
+	2. Nearby Bars Pubs or Clubs
+	3. Nearby Hotels
+	4. Nearby Meetups (came on suggestions)
+	5. Recreational Activities (came on suggestion)
+	6. Transit (TBD)
+	7. Movies and Theatrical Shows
+3- App must behave in a way such that we are able to find the location and pin point the coordinates accordingly.
+4- UI will be using Bootstrap apis for creation of buttons menu items etc.
