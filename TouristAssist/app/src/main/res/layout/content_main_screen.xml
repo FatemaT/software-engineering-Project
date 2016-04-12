@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/mbackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.cs442.faaltene.touristassist.MainScreen"
     tools:showIn="@layout/activity_main_screen">
@@ -17,14 +18,16 @@
         android:layout_height="wrap_content"
         android:hint="Enter City"
         android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="89dp"
-        android:layout_above="@+id/button"
+        android:id="@+id/editText"
+        android:layout_marginTop="131dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/editText"
+        android:layout_marginBottom="111dp" />
 </RelativeLayout>
