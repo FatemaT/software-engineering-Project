@@ -12,5 +12,19 @@
     tools:context="com.cs442.faaltene.touristassist.MainScreen"
     tools:showIn="@layout/activity_main_screen">
 
-
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter City"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="89dp"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
