@@ -6,5 +6,9 @@
     tools:context="com.cs442.faaltene.touristassist.restaurant_frag">
 
     <!-- TODO: Update blank fragment layout -->
-
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/restaurant_list"
+        android:layout_gravity="left|top" />
 </FrameLayout>
