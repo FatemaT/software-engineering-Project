@@ -21,7 +21,11 @@
         <item
             android:id="@+id/nav_hospital"
             android:icon="@drawable/hospital"
-            android:title="Hotels" />
+            android:title="Hospital" />
+        <item
+            android:id="@+id/nav_museum"
+            android:icon="@drawable/museum"
+            android:title="Museum" />
     </group>
 
     <item android:title="Communicate">
