@@ -5,7 +5,7 @@
     android:background="@drawable/navbackground"
     tools:context="com.cs442.faaltene.touristassist.show_frag">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update* blank fragment layout -->
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
