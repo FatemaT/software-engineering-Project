@@ -4,11 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_restaurant"
-            android:icon="@drawable/restaurant"
+            android:icon="@drawable/ic_local_restaurant_24dp"
             android:title="Restaurants" />
         <item
             android:id="@+id/nav_bar"
-            android:icon="@drawable/bar"
+            android:icon="@drawable/ic_local_bar_24dp"
             android:title="Bars" />
         <item
             android:id="@+id/nav_malls"
@@ -16,11 +16,11 @@
             android:title="Shopping Malls" />
         <item
             android:id="@+id/nav_hotel"
-            android:icon="@drawable/hotel"
+            android:icon="@drawable/ic_local_hotel_24dp"
             android:title="Hotels" />
         <item
             android:id="@+id/nav_hospital"
-            android:icon="@drawable/hospital"
+            android:icon="@drawable/ic_local_hospital_24dp"
             android:title="Hospital" />
         <item
             android:id="@+id/nav_museum"
