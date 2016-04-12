@@ -64,6 +64,7 @@ public class hospital_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainNavigation) getActivity()).setActionBarTitle("Hospitals");
         return inflater.inflate(R.layout.fragment_hospital_frag, container, false);
     }
 

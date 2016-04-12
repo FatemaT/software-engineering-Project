@@ -1,8 +1,12 @@
 package com.cs442.faaltene.touristassist;
 
+import android.support.v4.app.Fragment;
+import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +18,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainNavigation extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        restaurant_frag.OnFragmentInteractionListener,bar_frag.OnFragmentInteractionListener,
+        hospital_frag.OnFragmentInteractionListener, hotel_frag.OnFragmentInteractionListener,
+        mall_frag.OnFragmentInteractionListener, museum_frag.OnFragmentInteractionListener,
+        show_frag.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,27 +79,45 @@ public class MainNavigation extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_restaurant) {
-            // Handle the camera action
-        } else if (id == R.id.nav_bar) {
-
-        } else if (id == R.id.nav_hotel) {
-
-        } else if (id == R.id.nav_malls) {
-
-        } else if (id == R.id.nav_museum) {
-
-        } else if (id == R.id.nav_hospital) {
-
-        } else if (id == R.id.nav_share) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        if (id == R.id.nav_restaurant) {//handle restaurant fragment
+            fragmentClass = restaurant_frag.class;
+        } else if (id == R.id.nav_bar) {//handle bar fragment
+            fragmentClass = bar_frag.class;
+        } else if (id == R.id.nav_hotel) {//handle hotel fragment
+            fragmentClass = hotel_frag.class;
+        } else if (id == R.id.nav_malls) {//handle mall fragment
+            fragmentClass = mall_frag.class;
+        } else if (id == R.id.nav_museum) {//handle museum fragment
+            fragmentClass = museum_frag.class;
+        } else if (id == R.id.nav_hospital) {//handle hospital fragment
+            fragmentClass = hospital_frag.class;
+        } else if (id == R.id.nav_shows) {//handle show fragment
+            fragmentClass = show_frag.class;
+        } else if (id == R.id.nav_share) {//handle restaurant fragment
 
         } else if (id == R.id.nav_send) {
 
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

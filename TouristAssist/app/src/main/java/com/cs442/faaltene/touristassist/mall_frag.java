@@ -64,6 +64,7 @@ public class mall_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainNavigation) getActivity()).setActionBarTitle("Shopping Malls");
         return inflater.inflate(R.layout.fragment_mall_frag, container, false);
     }
 

@@ -64,7 +64,9 @@ public class bar_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainNavigation) getActivity()).setActionBarTitle("Hospitals");
         return inflater.inflate(R.layout.fragment_bar_frag, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

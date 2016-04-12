@@ -64,6 +64,7 @@ public class restaurant_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainNavigation) getActivity()).setActionBarTitle("Restaurants");
         return inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
     }
 
