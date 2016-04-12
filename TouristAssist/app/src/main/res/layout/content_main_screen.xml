@@ -27,6 +27,8 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submit"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:theme="@style/MyButton"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/cityName"
         android:layout_marginBottom="111dp" />
