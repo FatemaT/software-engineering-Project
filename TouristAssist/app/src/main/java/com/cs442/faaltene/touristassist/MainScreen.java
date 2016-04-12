@@ -1,5 +1,6 @@
 package com.cs442.faaltene.touristassist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,15 +10,28 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainScreen extends AppCompatActivity {
     Button submit;
+    EditText cityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        submit = (Button) findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cityName = (EditText) findViewById(R.id.cityName);
+                Intent i = new Intent(MainScreen.this, MainNavigation.class);
+                i.putExtra("city", cityName.getText().toString());
+                startActivity(i);
+            }
+        });
+
 
     }
 
