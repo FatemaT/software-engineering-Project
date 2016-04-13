@@ -4,9 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import models.Restaurant;
 
 
 /**
@@ -22,7 +29,11 @@ public class restaurant_frag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    ListView restaurant;
+    Restaurant[] restaurants;
+    ArrayList<String> rest;
+    View rootView;
+    ArrayAdapter<String> restad;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -58,6 +69,8 @@ public class restaurant_frag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -65,7 +78,18 @@ public class restaurant_frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainNavigation) getActivity()).setActionBarTitle("Restaurants");
-        return inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        rootView = inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
+        rest = new ArrayList<String>();
+        restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
+        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
+        for (int i = 0; i<restaurants.length; i++){
+            rest.add(restaurants[i].getRestaurantName());
+        }
+        restad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, rest);
+        restaurant.setAdapter(restad);
+        return rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

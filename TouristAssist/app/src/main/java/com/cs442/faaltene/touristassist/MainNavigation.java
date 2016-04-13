@@ -45,10 +45,10 @@ public class MainNavigation extends AppCompatActivity
         Intent i= getIntent();
         city = (TextView) findViewById(R.id.citytv);
         String citys = i.getStringExtra("city");
-        hotels = i.getParcelableExtra("hotels");
-        showtimes = i.getParcelableExtra("showtimes");
-        restaurants= i.getParcelableExtra("restaurants");
-        malls= i.getParcelableExtra("malls");
+        hotels = (Hotel[]) i.getSerializableExtra("hotels");
+        showtimes = (Showtime[]) i.getSerializableExtra("showtimes");
+        restaurants= (Restaurant[]) i.getSerializableExtra("restaurants");
+        malls= (Mall[]) i.getSerializableExtra("malls");
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
         city.setText("City of " + citys);
@@ -101,21 +101,27 @@ public class MainNavigation extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         Class fragmentClass = null;
+        Bundle b =new Bundle();
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (id == R.id.nav_restaurant) {//handle restaurant fragment
             fragmentClass = restaurant_frag.class;
+            b.putSerializable("restaurants", restaurants);
         } else if (id == R.id.nav_bar) {//handle bar fragment
             fragmentClass = bar_frag.class;
         } else if (id == R.id.nav_hotel) {//handle hotel fragment
             fragmentClass = hotel_frag.class;
+            b.putSerializable("hotels", hotels);
         } else if (id == R.id.nav_malls) {//handle mall fragment
             fragmentClass = mall_frag.class;
+            b.putSerializable("malls", malls);
         } else if (id == R.id.nav_museum) {//handle museum fragment
             fragmentClass = museum_frag.class;
         } else if (id == R.id.nav_hospital) {//handle hospital fragment
             fragmentClass = hospital_frag.class;
         } else if (id == R.id.nav_shows) {//handle show fragment
             fragmentClass = show_frag.class;
+            b.putSerializable("showtimes", showtimes);
         } else if (id == R.id.nav_share) {//handle restaurant fragment
 
         } else if (id == R.id.nav_send) {
@@ -123,6 +129,7 @@ public class MainNavigation extends AppCompatActivity
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(b);
         } catch (Exception e) {
             e.printStackTrace();
         }

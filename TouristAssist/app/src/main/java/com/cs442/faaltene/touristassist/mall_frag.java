@@ -7,6 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Mall;
 
 
 /**
@@ -22,7 +29,11 @@ public class mall_frag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    ListView mall;
+    Mall[] malls;
+    ArrayList<String> mal;
+    ArrayAdapter<String> malad;
+    View rootView;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -65,7 +76,18 @@ public class mall_frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainNavigation) getActivity()).setActionBarTitle("Shopping Malls");
-        return inflater.inflate(R.layout.fragment_mall_frag, container, false);
+        malls = (Mall[]) getArguments().getSerializable("malls");
+        rootView = inflater.inflate(R.layout.fragment_mall_frag, container, false);
+        mal = new ArrayList<String>();
+        malls = (Mall[]) getArguments().getSerializable("malls");
+        mall = (ListView)rootView.findViewById(R.id.mall_list);
+        for (int i = 0; i<malls.length; i++){
+            mal.add(malls[i].getMallName());
+        }
+        malad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, mal);
+        mall.setAdapter(malad);
+        return rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
