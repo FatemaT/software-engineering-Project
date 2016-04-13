@@ -20,10 +20,12 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import models.Hospital;
 import models.Hotel;
 import models.Mall;
 import models.Restaurant;
 import models.Showtime;
+import models.Club;
 
 public class MainScreen extends AppCompatActivity {
     Button submit;
@@ -38,6 +40,8 @@ public class MainScreen extends AppCompatActivity {
     Showtime[] showtimes;
     Restaurant[] restaurants;
     Mall[] malls;
+    Hospital[] hospitals;
+    Club[] clubs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,17 +102,20 @@ public class MainScreen extends AppCompatActivity {
             retrieveHotels();
             retrieveRestaurants();
             retrieveMalls();
+            retrieveHospitals();
+            retrieveClubs();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            i.putExtra("hotels",hotels);
-            i.putExtra("hotels",hotels);
+            i.putExtra("hotels", hotels);
+            i.putExtra("hospitals",hospitals);
             i.putExtra("showtimes",showtimes);
             i.putExtra("restaurants", restaurants);
             i.putExtra("malls",malls);
+            i.putExtra("clubs",clubs);
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
@@ -236,6 +243,62 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
+    public void retrieveHospitals() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getHospitals";
+        String METHOD_NAME = "getHospitals";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            hospitals = parseHospitals(soapObject);
+
+            String re = hospitals[0].getSpecializations();
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    public void retrieveClubs() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getClubs";
+        String METHOD_NAME = "getClubs";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            clubs = parseClubs(soapObject);
+
+            String re = clubs[0].getClubDetails();
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
     public static Hotel[] parseHotels(SoapObject soap)
     {
         Hotel[] hotels = new Hotel[soap.getPropertyCount()];
@@ -316,6 +379,47 @@ public class MainScreen extends AppCompatActivity {
             malls[i] = mall;
         }
         return malls;
+    }
+
+    public static Hospital[] parseHospitals(SoapObject soap)
+    {
+        Hospital[] hospitals = new Hospital[soap.getPropertyCount()];
+        for (int i = 0; i < hospitals.length; i++) {
+            SoapObject pii = (SoapObject)soap.getProperty(i);
+            Hospital hospital = new Hospital();
+
+            hospital.setCity(pii.getProperty(0).toString());
+            hospital.setCityId(pii.getProperty(1).toString());
+            hospital.setCoordinates(pii.getProperty(2).toString());
+            hospital.setHospitalAddress(pii.getProperty(3).toString());
+            hospital.setHospitalDetails(pii.getProperty(4).toString());
+            hospital.setHospitalId(pii.getProperty(5).toString());
+            hospital.setHospitalName(pii.getProperty(6).toString());
+            hospital.setSpecializations(pii.getProperty(7).toString());
+            hospitals[i] = hospital;
+
+        }
+        return hospitals;
+    }
+
+    public static Club[] parseClubs(SoapObject soap)
+    {
+        Club[] clubs = new Club[soap.getPropertyCount()];
+        for (int i = 0; i < clubs.length; i++) {
+            SoapObject pii = (SoapObject)soap.getProperty(i);
+            Club club = new Club();
+
+            club.setCity(pii.getProperty(0).toString());
+            club.setCityId(pii.getProperty(1).toString());
+            club.setClubAddress(pii.getProperty(2).toString());
+            club.setClubDetails(pii.getProperty(3).toString());
+            club.setClubId(pii.getProperty(4).toString());
+            club.setClubName(pii.getProperty(5).toString());
+            club.setClub_disc(pii.getProperty(6).toString());
+            club.setCoordinates(pii.getProperty(7).toString());
+            clubs[i]=club;
+        }
+        return clubs;
     }
 
 

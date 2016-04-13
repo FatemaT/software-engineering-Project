@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import models.Club;
+import models.Hospital;
 import models.Hotel;
 import models.Mall;
 import models.Restaurant;
@@ -36,6 +38,8 @@ public class MainNavigation extends AppCompatActivity
     Showtime[] showtimes;
     Restaurant[] restaurants;
     Mall[] malls;
+    Hospital[] hospitals;
+    Club[] clubs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,8 @@ public class MainNavigation extends AppCompatActivity
         showtimes = (Showtime[]) i.getSerializableExtra("showtimes");
         restaurants= (Restaurant[]) i.getSerializableExtra("restaurants");
         malls= (Mall[]) i.getSerializableExtra("malls");
+        hospitals=(Hospital[]) i.getSerializableExtra("hospitals");
+        clubs=(Club[]) i.getSerializableExtra("clubs");
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
         city.setText("City of " + citys);
@@ -109,6 +115,7 @@ public class MainNavigation extends AppCompatActivity
             b.putSerializable("restaurants", restaurants);
         } else if (id == R.id.nav_bar) {//handle bar fragment
             fragmentClass = bar_frag.class;
+            b.putSerializable("clubs", clubs);
         } else if (id == R.id.nav_hotel) {//handle hotel fragment
             fragmentClass = hotel_frag.class;
             b.putSerializable("hotels", hotels);
@@ -119,6 +126,7 @@ public class MainNavigation extends AppCompatActivity
             fragmentClass = museum_frag.class;
         } else if (id == R.id.nav_hospital) {//handle hospital fragment
             fragmentClass = hospital_frag.class;
+            b.putSerializable("hospitals", hospitals);
         } else if (id == R.id.nav_shows) {//handle show fragment
             fragmentClass = show_frag.class;
             b.putSerializable("showtimes", showtimes);
