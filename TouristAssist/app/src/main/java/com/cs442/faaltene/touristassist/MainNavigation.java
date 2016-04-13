@@ -45,6 +45,10 @@ public class MainNavigation extends AppCompatActivity
         Intent i= getIntent();
         city = (TextView) findViewById(R.id.citytv);
         String citys = i.getStringExtra("city");
+        hotels = i.getParcelableExtra("hotels");
+        showtimes = i.getParcelableExtra("showtimes");
+        restaurants= i.getParcelableExtra("restaurants");
+        malls= i.getParcelableExtra("malls");
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
         city.setText("City of " + citys);

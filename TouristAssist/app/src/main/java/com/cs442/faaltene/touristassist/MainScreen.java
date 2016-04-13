@@ -105,6 +105,7 @@ public class MainScreen extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
             i.putExtra("hotels",hotels);
+            i.putExtra("hotels",hotels);
             i.putExtra("showtimes",showtimes);
             i.putExtra("restaurants", restaurants);
             i.putExtra("malls",malls);
