@@ -13,4 +13,5 @@
         android:layout_height="386dp"
         android:layout_gravity="center_vertical|left"
         android:id="@+id/bar_list" />
+
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,6 +31,7 @@ public class restaurant_frag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    Context mContext;
     ListView restaurant;
     Restaurant[] restaurants;
     ArrayList<String> rest;
@@ -88,6 +91,16 @@ public class restaurant_frag extends Fragment {
         }
         restad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, rest);
         restaurant.setAdapter(restad);
+        mContext = getActivity().getApplicationContext();
+        restaurant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(mContext, Restaurant_detail.class);
+                i.putExtra("restaurant",restaurants[position]);
+                startActivity(i);
+
+            }
+        });
         return rootView;
 
     }
