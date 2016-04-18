@@ -130,7 +130,7 @@ public class GenResponses {
             reviews.add(new Review("022", "010", "5", "Best Place"));
         }
         Review[] reviewArray = reviews.toArray(new Review[reviews.size()]);
-        return new Review[0];
+        return  reviewArray;
     }
 
     public Showtime[] getShowtimes(String cityId) {
