@@ -1,6 +1,8 @@
 package models;
 
-public class Review {
+import java.io.Serializable;
+
+public class Review implements Serializable {
     private String reviewId;
     private String entityId;
     private String rating;

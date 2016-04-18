@@ -1,12 +1,14 @@
 package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Mall;
+import models.Review;
 
 
 /**
@@ -30,7 +33,9 @@ public class mall_frag extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     ListView mall;
+    Context mContext;
     Mall[] malls;
+    Review[] reviews;
     ArrayList<String> mal;
     ArrayAdapter<String> malad;
     View rootView;
@@ -77,6 +82,7 @@ public class mall_frag extends Fragment {
         // Inflate the layout for this fragment
         ((MainNavigation) getActivity()).setActionBarTitle("Shopping Malls");
         malls = (Mall[]) getArguments().getSerializable("malls");
+        reviews = (Review[])getArguments().getSerializable("reviews");
         rootView = inflater.inflate(R.layout.fragment_mall_frag, container, false);
         mal = new ArrayList<String>();
         malls = (Mall[]) getArguments().getSerializable("malls");
@@ -86,6 +92,24 @@ public class mall_frag extends Fragment {
         }
         malad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, mal);
         mall.setAdapter(malad);
+        mContext = getActivity().getApplicationContext();
+        mall.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(mContext, Mall_detail.class);
+                i.putExtra("reviews", reviews);
+                i.putExtra("restaurant", malls[position]);
+                i.putExtra("Mname", malls[position].getMallName());
+                i.putExtra("Minfo", malls[position].getMallDetails());
+                i.putExtra("Mad", malls[position].getMallAddress());
+                i.putExtra("MBrand", malls[position].getMall_brands());
+                i.putExtra("MStore", malls[position].getMall_stores());
+                i.putExtra("MCoord", malls[position].getCoordinates());
+                i.putExtra("Mid", malls[position].getMallId());
+                startActivity(i);
+
+            }
+        });
         return rootView;
 
     }
