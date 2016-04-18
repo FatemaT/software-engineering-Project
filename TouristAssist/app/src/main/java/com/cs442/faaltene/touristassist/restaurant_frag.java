@@ -16,6 +16,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import models.Restaurant;
+import models.Review;
 
 
 /**
@@ -34,6 +35,7 @@ public class restaurant_frag extends Fragment {
     Context mContext;
     ListView restaurant;
     Restaurant[] restaurants;
+    Review[] reviews;
     ArrayList<String> rest;
     View rootView;
     ArrayAdapter<String> restad;
@@ -85,6 +87,7 @@ public class restaurant_frag extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
         rest = new ArrayList<String>();
         restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
+        reviews = (Review[])getArguments().getSerializable("reviews");
         restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
         for (int i = 0; i<restaurants.length; i++){
             rest.add(restaurants[i].getRestaurantName());
@@ -96,6 +99,7 @@ public class restaurant_frag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(mContext, Restaurant_detail.class);
+                i.putExtra("reviews",reviews);
                 i.putExtra("restaurant",restaurants[position]);
                 i.putExtra("Rname",restaurants[position].getRestaurantName());
                 i.putExtra("Rinfo",restaurants[position].getRestaurantDetails());

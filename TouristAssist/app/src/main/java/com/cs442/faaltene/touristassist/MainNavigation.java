@@ -25,6 +25,7 @@ import models.Hospital;
 import models.Hotel;
 import models.Mall;
 import models.Restaurant;
+import models.Review;
 import models.Showtime;
 
 public class MainNavigation extends AppCompatActivity
@@ -40,6 +41,7 @@ public class MainNavigation extends AppCompatActivity
     Mall[] malls;
     Hospital[] hospitals;
     Club[] clubs;
+    Review[] reviews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class MainNavigation extends AppCompatActivity
         malls= (Mall[]) i.getSerializableExtra("malls");
         hospitals=(Hospital[]) i.getSerializableExtra("hospitals");
         clubs=(Club[]) i.getSerializableExtra("clubs");
+        reviews = (Review[]) i.getSerializableExtra("reviews");
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
         city.setText("City of " + citys);
@@ -113,23 +116,29 @@ public class MainNavigation extends AppCompatActivity
         if (id == R.id.nav_restaurant) {//handle restaurant fragment
             fragmentClass = restaurant_frag.class;
             b.putSerializable("restaurants", restaurants);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_bar) {//handle bar fragment
             fragmentClass = bar_frag.class;
             b.putSerializable("clubs", clubs);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_hotel) {//handle hotel fragment
             fragmentClass = hotel_frag.class;
             b.putSerializable("hotels", hotels);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_malls) {//handle mall fragment
             fragmentClass = mall_frag.class;
             b.putSerializable("malls", malls);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_museum) {//handle museum fragment
             fragmentClass = museum_frag.class;
         } else if (id == R.id.nav_hospital) {//handle hospital fragment
             fragmentClass = hospital_frag.class;
             b.putSerializable("hospitals", hospitals);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_shows) {//handle show fragment
             fragmentClass = show_frag.class;
             b.putSerializable("showtimes", showtimes);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_share) {//handle restaurant fragment
 
         } else if (id == R.id.nav_send) {
