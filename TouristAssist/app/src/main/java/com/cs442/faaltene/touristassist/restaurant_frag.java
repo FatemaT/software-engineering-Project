@@ -97,6 +97,12 @@ public class restaurant_frag extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(mContext, Restaurant_detail.class);
                 i.putExtra("restaurant",restaurants[position]);
+                i.putExtra("Rname",restaurants[position].getRestaurantName());
+                i.putExtra("Rinfo",restaurants[position].getRestaurantDetails());
+                i.putExtra("Rad",restaurants[position].getRestaurantAddress());
+                i.putExtra("RCui",restaurants[position].getRestaurantCusines());
+                i.putExtra("RCoord",restaurants[position].getCoordinates());
+                i.putExtra("Rid",restaurants[position].getRestaurantId());
                 startActivity(i);
 
             }

@@ -12,4 +12,37 @@
     tools:context="com.cs442.faaltene.touristassist.Restaurant_detail"
     tools:showIn="@layout/activity_restaurant_detail">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rname"
+        android:text="Restaurant Name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rad"
+        android:text="Restaurant Address"
+        android:layout_below="@+id/rname"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rinfo"
+        android:text="Restaurant Info"
+        android:layout_below="@+id/rad"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rCuitv"
+        android:text="Restaurant Cuisine"
+        android:layout_below="@+id/rinfo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rCui"
+        android:text="Restaurant Cuisine"
+        android:layout_alignTop="@+id/rCuitv"
+        android:layout_toEndOf="@+id/rad" />
+
+
 </RelativeLayout>
