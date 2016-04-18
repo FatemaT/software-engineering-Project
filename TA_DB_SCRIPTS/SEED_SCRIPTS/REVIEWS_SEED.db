@@ -1,0 +1,4 @@
+INSERT INTO `tourist_assist`.`REVIEWS` (`REVIEW_id`, `ET_ID`, `REVIEW_RVW`, `REVIEW_RATING`) VALUES ('020', '004', 'Very nice Place', '3.5');
+INSERT INTO `tourist_assist`.`REVIEWS` (`REVIEW_id`, `ET_ID`, `REVIEW_RVW`, `REVIEW_RATING`) VALUES ('021', '006', 'Awesome Place', '4');
+INSERT INTO `tourist_assist`.`REVIEWS` (`REVIEW_id`, `ET_ID`, `REVIEW_RATING`) VALUES ('022', '010', '5');
+

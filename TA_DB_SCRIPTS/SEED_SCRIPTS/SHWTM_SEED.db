@@ -1,0 +1,4 @@
+INSERT INTO `tourist_assist`.`SHWTMS` (`SHWTM_id`, `SHWTM_name`, `SHWTM_addr`, `SHWTM_dtls`, `SHWTM_cdt`, `SHWTM_ct`, `SHWTM_ct_id`, `SHWTM_DRN`, `SHWTM_SHWS`) VALUES ('023', 'The Jungle Book', 'AMC River East', '4 shows', '009876t5678,09876789', 'Chicago', '001', '2', 'All Days');
+INSERT INTO `tourist_assist`.`SHWTMS` (`SHWTM_id`, `SHWTM_name`, `SHWTM_addr`, `SHWTM_dtls`, `SHWTM_cdt`, `SHWTM_ct`, `SHWTM_ct_id`, `SHWTM_DRN`, `SHWTM_SHWS`) VALUES ('024', 'Batman v Superman', 'Amc River East', '4 shows', '009876t5678,09876789', 'Chicago', '001', '2', 'All Days');
+INSERT INTO `tourist_assist`.`SHWTMS` (`SHWTM_id`, `SHWTM_name`, `SHWTM_addr`, `SHWTM_dtls`, `SHWTM_cdt`, `SHWTM_ct`, `SHWTM_ct_id`, `SHWTM_DRN`, `SHWTM_SHWS`) VALUES ('025', 'The Lion King', 'Amc River East', '4 shows', '009876t5678,09876789', 'Chicago', '001', '3', 'Weekends');
+

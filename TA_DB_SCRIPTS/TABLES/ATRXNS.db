@@ -1,0 +1,10 @@
+CREATE TABLE `tourist_assist`.`atrxn` (
+  `atrxn_id` INT NOT NULL COMMENT '',
+  `atrxn_name` VARCHAR(45) NULL COMMENT '',
+  `atrxn_addr` VARCHAR(255) NULL COMMENT '',
+  `atrxn_cdt` VARCHAR(45) NULL COMMENT '',
+  `atrxn_fee` VARCHAR(45) NULL COMMENT '',
+  `atrxn_ct` VARCHAR(45) NULL COMMENT '',
+  `atrxn_ct_id` VARCHAR(45) NOT NULL COMMENT '',
+  PRIMARY KEY (`atrxn_id`)  COMMENT '');
+

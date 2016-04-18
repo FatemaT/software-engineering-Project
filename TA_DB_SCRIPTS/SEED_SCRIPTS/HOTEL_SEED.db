@@ -1,0 +1,3 @@
+INSERT INTO `tourist_assist`.`HOTELS` (`HOTEL_id`, `HOTEL_name`, `HOTEL_addr`, `HOTEL_dtls`, `HOTEL_cdt`, `HOTEL_ct`, `HOTEL_ct_id`) VALUES ('011', 'Chicago Hotel', '121 East Avenue', 'Lake View Hotels', '000101110,7787678', 'Chicago', '001');
+INSERT INTO `tourist_assist`.`HOTELS` (`HOTEL_id`, `HOTEL_name`, `HOTEL_addr`, `HOTEL_dtls`, `HOTEL_cdt`, `HOTEL_ct`, `HOTEL_ct_id`) VALUES ('012', 'Lake View Hotels', '134 South Wabash Avenue', 'Alpha Hotel of the Downtown', '53454343,14253542', 'Chicago', '001');
+INSERT INTO `tourist_assist`.`HOTELS` (`HOTEL_id`, `HOTEL_name`, `HOTEL_addr`, `HOTEL_dtls`, `HOTEL_cdt`, `HOTEL_ct`) VALUES ('013', 'Green Graden Hotels', '112 Alpha Avenue', 'Hotel with Indian Cusine', '531121343,1412121542', 'Chicago');
