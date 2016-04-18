@@ -1,0 +1,7 @@
+CREATE TABLE `tourist_assist`.`city` (
+  `city_id` INT NOT NULL COMMENT '',
+  `city_name` VARCHAR(45) NULL COMMENT '',
+  `atrxn_cdt` VARCHAR(45) NULL COMMENT '',
+  `atrxn_ct` VARCHAR(45) NULL COMMENT '',
+  PRIMARY KEY (`city_id`)  COMMENT '');
+

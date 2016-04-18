@@ -1,0 +1,4 @@
+INSERT INTO `tourist_assist`.`MALLS` (`MALL_id`, `MALL_name`, `MALL_addr`, `MALL_dtls`, `MALL_cdt`, `MALL_ct`, `MALL_ct_id`, `MALL_STORE`, `MALL_BRAND`) VALUES ('014', 'Chicago Central Mall', '454 Beta Avenue', 'Mall with elevator', '000011010334, 454354322111', 'Chicago', '001', 'Jewelery, Boots', 'Nike, Adidas');
+INSERT INTO `tourist_assist`.`MALLS` (`MALL_id`, `MALL_name`, `MALL_addr`, `MALL_dtls`, `MALL_cdt`, `MALL_ct`, `MALL_ct_id`, `MALL_STORE`, `MALL_BRAND`) VALUES ('015', 'Chicago Eastern Mall', 'XYZ Beta Avenue', 'Mall with british stores', '000011010334, 454354322111', 'Chicago', '001', 'Golf Accessories, Winter Boots', 'Golf Stands, Stallion');
+INSERT INTO `tourist_assist`.`MALLS` (`MALL_id`, `MALL_name`, `MALL_addr`, `MALL_dtls`, `MALL_cdt`, `MALL_ct`, `MALL_ct_id`, `MALL_STORE`) VALUES ('016', 'Chicago Western Mall', 'NXW Beta Avenue', 'Mall with best accessories', '987678901111, 123454321', 'Chicago', '001', 'Jewelery, Perfumes, Boots');
+
