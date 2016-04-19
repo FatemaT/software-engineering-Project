@@ -41,8 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/rCui"
         android:text="Restaurant Cuisine"
-        android:layout_alignTop="@+id/rCuitv"
-        android:layout_toEndOf="@+id/rad" />
+        android:layout_below="@+id/rCuitv"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
