@@ -30,13 +30,13 @@ public class TouristAssistService {
     @WebMethod
     public CityResponse getCityFromCityCoordinates(@WebParam(name = "arg0") String cityCoordinates) {
         ResponseBuilder responseBuilder = new ResponseBuilder();
-        return responseBuilder.getCityFromCityName(cityCoordinates);
+        return responseBuilder.getCityFromCityCoordinates(cityCoordinates);
     }
 
     @WebMethod
     public CityResponse getCityFromCityId(@WebParam(name = "arg0") String cityId) {
         ResponseBuilder responseBuilder = new ResponseBuilder();
-        return responseBuilder.getCityFromCityName(cityId);
+        return responseBuilder.getCityFromCityId(cityId);
     }
 
     @WebMethod
