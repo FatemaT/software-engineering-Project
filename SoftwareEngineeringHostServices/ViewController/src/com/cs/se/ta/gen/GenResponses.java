@@ -1,5 +1,7 @@
 package com.cs.se.ta.gen;
 
+import com.cs.se.ta.db.DBConnectionMgr;
+import com.cs.se.ta.db.SQLAggregatedConnectionObjects;
 import com.cs.se.ta.resobj.Attraction;
 import com.cs.se.ta.resobj.City;
 
@@ -18,16 +20,47 @@ import com.cs.se.ta.resobj.Review;
 import com.cs.se.ta.resobj.Showtime;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GenResponses {
     public GenResponses() {
         super();
     }
-    private static boolean isDBDataAvailable = false;
+    private static boolean isDBDataAvailable = true;
+    private DBConnectionMgr connectionMgr = DBConnectionMgr.getInstnace();
 
-    public City getCity(String cityId) {
-        City city = new City("001", "Chicago", "00000000");
+    public City getCityByCityName(String cityName) {
+        City city = null;
+        if (!isDBDataAvailable){
+            city = new City("001", "Chicago", "00000000");
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from city where UPPER(city_name) LIKE UPPER('%"+cityName+"%')";
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+            
+                try {
+                    while (resultSet.next()) {     
+                        String  city_id = resultSet.getString("city_id"),
+                                city_name = resultSet.getString("city_name"),
+                                city_cdt = resultSet.getString("city_cdt");
+                        city = new City(city_id, city_name, city_cdt);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            
+            
+            }
+        
         return city;
     }
 
@@ -42,6 +75,33 @@ public class GenResponses {
 
             attractions.add(new Attraction("004", "Meuseum of Science", "3241 XYZ Avenue", "Meuseum of Science",
                                            "014321,15691280", "10.00 USD", "Chicago", "001"));
+        } else {
+            SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+            String query = "select * from atrxns where atrxn_ct_id="+cityId;
+            sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+            ResultSet resultSet = sqlObjects.getResultSet();
+            try {
+                while (resultSet.next()) {     
+                    String atrxn_id = resultSet.getString("atrxn_id"),
+                    atrxn_name = resultSet.getString("atrxn_name"),
+                    atrxn_addr = resultSet.getString("atrxn_addr"),
+                    atrxn_cdt = resultSet.getString("atrxn_cdt"),
+                    atrxn_fee = resultSet.getString("atrxn_fee"),
+                    atrxn_ct = resultSet.getString("atrxn_ct"),
+                    atrxn_ct_id = resultSet.getString("atrxn_ct_id"),
+                    atrxn_dtls = resultSet.getString("atrxn_dtls");
+                    attractions.add(new Attraction(atrxn_id, atrxn_name, atrxn_addr, atrxn_dtls, atrxn_cdt, atrxn_fee, atrxn_ct, atrxn_ct_id));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connectionMgr.closeConnectionObjects(sqlObjects);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
         Attraction[] attractionArray = attractions.toArray(new Attraction[attractions.size()]);
         return attractionArray;
@@ -57,7 +117,35 @@ public class GenResponses {
                                "Chicago", "Yes", "001"));
             clubs.add(new Club("007", "Fundamental Physics Club", "211 RLMN Street", "Obama was here",
                                "002100119,0100111", "Chicago", "NO", "001"));
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from CLUBS where CLUB_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  club_id = resultSet.getString("club_id"),
+                                club_name = resultSet.getString("club_name"),
+                                club_addr = resultSet.getString("club_addr"),
+                                club_dtls = resultSet.getString("club_dtls"),
+                                CLUB_cdt = resultSet.getString("CLUB_cdt"),
+                                CLUB_DISC = resultSet.getString("CLUB_DISC"),
+                                CLUB_ct = resultSet.getString("CLUB_ct"),
+                                CLUB_ct_id = resultSet.getString("CLUB_ct_id");
+                        clubs.add(new Club(club_id, club_name, club_addr, club_dtls, CLUB_cdt, CLUB_ct, CLUB_DISC, CLUB_ct_id));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
+
         Club[] clubArray = clubs.toArray(new Club[clubs.size()]);
         return clubArray;
     }
@@ -71,7 +159,35 @@ public class GenResponses {
                                        "31198791,99831286", "Cardiac and ENT", "Chicago", "001"));
             hospitals.add(new Hospital("010", "Rush Hospital", "42nd South Street", "Alpha hospital of North Chicago",
                                        "44553291,94788376", "Cardiac and Emergency", "Chicago", "001"));
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from HOSPITALS where HOSPITAL_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  HOSPITAL_id = resultSet.getString("HOSPITAL_id"),
+                                HOSPITAL_name = resultSet.getString("HOSPITAL_name"),
+                                HOSPITAL_addr = resultSet.getString("HOSPITAL_addr"),
+                                HOSPITAL_dtls = resultSet.getString("HOSPITAL_dtls"),
+                                HOSPITAL_cdt = resultSet.getString("HOSPITAL_cdt"),
+                                HOSPITAL_SPL = resultSet.getString("HOSPITAL_SPL"),
+                                HOSPITAL_ct = resultSet.getString("HOSPITAL_ct"),
+                                HOSPITAL_ct_id = resultSet.getString("HOSPITAL_ct_id");
+                        hospitals.add(new Hospital(HOSPITAL_id, HOSPITAL_name, HOSPITAL_addr, HOSPITAL_dtls, HOSPITAL_cdt, HOSPITAL_SPL, HOSPITAL_ct, HOSPITAL_ct_id));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
+
         Hospital[] hospitalArray = hospitals.toArray(new Hospital[hospitals.size()]);
         return hospitalArray;
     }
@@ -85,6 +201,32 @@ public class GenResponses {
                                  "53454343,14253542", "Chicago", "001"));
             hotels.add(new Hotel("013", "Green Graden Hotels", "112 Alpha Avenue", "Hotel with Indian Cusine",
                                  "531121343,1412121542", "Chicago", "001"));
+        }  else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from HOTELS where HOTEL_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  HOTEL_id = resultSet.getString("HOTEL_id"),
+                                HOTEL_name = resultSet.getString("HOTEL_name"),
+                                HOTEL_addr = resultSet.getString("HOTEL_addr"),
+                                HOTEL_dtls = resultSet.getString("HOTEL_dtls"),
+                                HOTEL_cdt = resultSet.getString("HOTEL_cdt"),
+                                HOTEL_ct = resultSet.getString("HOTEL_ct"),
+                                HOTEL_ct_id = resultSet.getString("HOTEL_ct_id");
+                        hotels.add(new Hotel(HOTEL_id, HOTEL_name, HOTEL_addr, HOTEL_dtls, HOTEL_cdt, HOTEL_ct, HOTEL_ct_id));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         Hotel[] hotelArray = hotels.toArray(new Hotel[hotels.size()]);
         return hotelArray;
@@ -101,6 +243,34 @@ public class GenResponses {
             malls.add(new Mall("016", "Chicago Western Mall", "NXW Beta Avenue", "Mall with best accessories",
                                "987678901111, 123454321", "Chicago", "Jewelery, Perfumes, Boots", "Alias, XYZ, Adidas",
                                "001"));
+        }  else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from MALLS where MALL_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  MALL_id = resultSet.getString("MALL_id"),
+                                MALL_name = resultSet.getString("MALL_name"),
+                                MALL_addr = resultSet.getString("MALL_addr"),
+                                MALL_dtls = resultSet.getString("MALL_dtls"),
+                                MALL_cdt = resultSet.getString("MALL_cdt"),
+                                MALL_ct = resultSet.getString("MALL_ct"),
+                                MALL_ct_id = resultSet.getString("MALL_ct_id"),
+                                MALL_STORE = resultSet.getString("MALL_STORE"),
+                                MALL_BRAND = resultSet.getString("MALL_BRAND");
+                        malls.add(new Mall(MALL_id, MALL_name, MALL_addr, MALL_dtls, MALL_cdt, MALL_ct, MALL_STORE, MALL_BRAND, MALL_ct_id));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         Mall[] mallArray = malls.toArray(new Mall[malls.size()]);
         return mallArray;
@@ -117,6 +287,33 @@ public class GenResponses {
             restaurants.add(new Restaurant("019", "YYY Chinese", "4433 Delta Street", "Best Chinese Restaurant",
                                            "Chinese, Thai", "45642325, 345675432", "Chicago", "001"));
 
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from RSTRNTS where RSTRNT_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  RSTRNT_id  = resultSet.getString("RSTRNT_id"),
+                                RSTRNT_name = resultSet.getString("RSTRNT_name"),
+                                RSTRNT_addr = resultSet.getString("RSTRNT_addr"),
+                                RSTRNT_dtls = resultSet.getString("RSTRNT_dtls"),
+                                RSTRNT_cdt = resultSet.getString("RSTRNT_cdt"),
+                                RSTRNT_ct = resultSet.getString("RSTRNT_ct"),
+                                RSTRNT_ct_id = resultSet.getString("RSTRNT_ct_id"),
+                                RSTRNT_CUS = resultSet.getString("RSTRNT_CUS");
+                       restaurants.add(new Restaurant(RSTRNT_id, RSTRNT_name, RSTRNT_addr, RSTRNT_dtls, RSTRNT_CUS, RSTRNT_cdt, RSTRNT_ct, RSTRNT_ct_id));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         Restaurant[] restaruantArray = restaurants.toArray(new Restaurant[restaurants.size()]);
         return restaruantArray;
@@ -128,9 +325,32 @@ public class GenResponses {
             reviews.add(new Review("020", "004", "3.5", "Very nice Place"));
             reviews.add(new Review("021", "006", "4", "Awesome Place"));
             reviews.add(new Review("022", "010", "5", "Best Place"));
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from REVIEWS where ET_ID="+entityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  REVIEW_id = resultSet.getString("REVIEW_id"),
+                                ET_ID = resultSet.getString("ET_ID"),
+                                REVIEW_RVW = resultSet.getString("REVIEW_RVW"),
+                                REVIEW_RATING = resultSet.getString("REVIEW_RATING");
+                       reviews.add(new Review(REVIEW_id, ET_ID, REVIEW_RATING, REVIEW_RVW));
+                            
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         Review[] reviewArray = reviews.toArray(new Review[reviews.size()]);
-        return  reviewArray;
+        return reviewArray;
     }
 
     public Showtime[] getShowtimes(String cityId) {
@@ -142,9 +362,37 @@ public class GenResponses {
                                        "2 hours", "All day", "Chicago"));
             showtimes.add(new Showtime("025", "10 Cloverfield", "Amc River East", "4 shows", "009876t5678,09876789", "Chicago", "2 hours", "All day", "Chicago"));
 
+        } else {
+                SQLAggregatedConnectionObjects sqlObjects = new SQLAggregatedConnectionObjects();
+                String query = "select * from SHWTMS where SHWTM_ct_id="+cityId;
+                sqlObjects = connectionMgr.fetchResultSetFromQuery(query, sqlObjects);
+                ResultSet resultSet = sqlObjects.getResultSet();
+                try {
+                    while (resultSet.next()) {     
+                        String  SHWTM_id = resultSet.getString("SHWTM_id"),
+                                SHWTM_name = resultSet.getString("SHWTM_name"),
+                                SHWTM_addr = resultSet.getString("SHWTM_addr"),
+                                SHWTM_dtls = resultSet.getString("SHWTM_dtls"),
+                                SHWTM_cdt = resultSet.getString("SHWTM_cdt"),
+                                SHWTM_ct = resultSet.getString("SHWTM_ct"),
+                                SHWTM_ct_id = resultSet.getString("SHWTM_ct_id"),
+                                SHWTM_DRN = resultSet.getString("SHWTM_DRN"),
+                                SHWTM_SHWS = resultSet.getString("SHWTM_SHWS");
+                       showtimes.add(new Showtime(SHWTM_id, SHWTM_name, SHWTM_addr, SHWTM_dtls, SHWTM_cdt, SHWTM_ct, SHWTM_DRN, SHWTM_SHWS, SHWTM_ct_id));     
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connectionMgr.closeConnectionObjects(sqlObjects);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         
         Showtime[] showtimeArray = showtimes.toArray(new Showtime[showtimes.size()]);
         return showtimeArray;
     }
+
 }

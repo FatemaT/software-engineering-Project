@@ -20,19 +20,21 @@ public class ResponseBuilder {
 
     public CityResponse getCityFromCityName(String cityName) {
         CityResponse cityResponse = new CityResponse();
-        cityResponse.setCity(genResponse.getCity(cityName));
+        cityResponse.setCity(genResponse.getCityByCityName(cityName));
         return cityResponse;
     }
 
     public CityResponse getCityFromCityCoordinates(String cityCoordinates) {
         CityResponse cityResponse = new CityResponse();
-        cityResponse.setCity(genResponse.getCity(cityCoordinates));
+        //TODO: find from coordinates
+        //cityResponse.setCity(genResponse.getCity(cityCoordinates));
         return cityResponse;
     }
 
     public CityResponse getCityFromCityId(String cityId) {
         CityResponse cityResponse = new CityResponse();
-        cityResponse.setCity(genResponse.getCity(cityId));
+        //TODO: find from City Id
+        //cityResponse.setCity(genResponse.getCity(cityId));
         return cityResponse;
     }
 
