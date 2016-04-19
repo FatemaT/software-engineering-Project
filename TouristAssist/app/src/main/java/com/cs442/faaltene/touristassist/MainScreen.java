@@ -24,6 +24,7 @@ import models.Hospital;
 import models.Hotel;
 import models.Mall;
 import models.Restaurant;
+import models.Review;
 import models.Showtime;
 import models.Club;
 
@@ -42,6 +43,7 @@ public class MainScreen extends AppCompatActivity {
     Mall[] malls;
     Hospital[] hospitals;
     Club[] clubs;
+    Review[] reviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +106,8 @@ public class MainScreen extends AppCompatActivity {
             retrieveMalls();
             retrieveHospitals();
             retrieveClubs();
+            retrieveReviews();
+
             return null;
         }
 
@@ -116,6 +120,7 @@ public class MainScreen extends AppCompatActivity {
             i.putExtra("restaurants", restaurants);
             i.putExtra("malls",malls);
             i.putExtra("clubs",clubs);
+            i.putExtra("reviews",reviews);
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
@@ -298,6 +303,35 @@ public class MainScreen extends AppCompatActivity {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
+    public void retrieveReviews() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getReviews";
+        String METHOD_NAME = "getReviews";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            reviews = parseReviews(soapObject);
+
+            String re = soapObject.getProperty(0).toString();
+            // System.out.println("*************" +re);
+
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
 
     public static Hotel[] parseHotels(SoapObject soap)
     {
@@ -421,6 +455,21 @@ public class MainScreen extends AppCompatActivity {
         }
         return clubs;
     }
+    public static Review[] parseReviews(SoapObject soap)
+    {
+        Review[] reviews = new Review[soap.getPropertyCount()];
+        for (int i = 0; i < reviews.length; i++) {
+            SoapObject pii = (SoapObject)soap.getProperty(i);
+            Review review = new Review();
 
+            review.setEntityId(pii.getProperty(0).toString());
+            review.setRating(pii.getProperty(1).toString());
+            review.setReview(pii.getProperty(2).toString());
+            review.setReviewId(pii.getProperty(3).toString());
+            reviews[i] = review;
+
+        }
+        return reviews;
+    }
 
 }

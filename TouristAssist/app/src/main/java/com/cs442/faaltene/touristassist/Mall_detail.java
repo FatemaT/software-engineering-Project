@@ -14,68 +14,72 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.ksoap2.serialization.SoapObject;
-
 import java.util.ArrayList;
 
-import models.Restaurant;
+import models.Mall;
 import models.Review;
 
-public class Restaurant_detail extends AppCompatActivity {
-    Restaurant[] restaurant;
+public class Mall_detail extends AppCompatActivity {
+    Mall[] mall;
     Review[] reviews;
-    TextView rname;
-    TextView rad;
-    TextView rinfo;
-    ListView rrev;
+    TextView mname;
+    TextView mad;
+    TextView minfo;
+    ListView mrev;
+    TextView mb;
+    TextView ms;
     TextView rating;
     TextView review;
     ArrayList<Review> rev;
     ArrayAdapter<Review> revad;
-    TextView rcui;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_detail);
+        setContentView(R.layout.activity_mall_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         reviews = (Review[])intent.getSerializableExtra("reviews");
-        rname = (TextView)findViewById(R.id.rname);
-        rad = (TextView)findViewById(R.id.rad);
-        rinfo = (TextView)findViewById(R.id.rinfo);
-        rcui = (TextView)findViewById(R.id.rCui);
-        String name = intent.getStringExtra("Rname");
-        String add=intent.getStringExtra("Rad");
-        String info=intent.getStringExtra("Rinfo");
-        String cuisine=intent.getStringExtra("RCui");
-        String coord=intent.getStringExtra("RCoord");
-        String rid = intent.getStringExtra("Rid");
+        mname = (TextView)findViewById(R.id.mname);
+        mad = (TextView)findViewById(R.id.mad);
+        minfo = (TextView)findViewById(R.id.minfo);
+        mb = (TextView)findViewById(R.id.mB);
+        ms = (TextView)findViewById(R.id.mS);
+        String name = intent.getStringExtra("Mname");
+        String add=intent.getStringExtra("Mad");
+        String info=intent.getStringExtra("Minfo");
+        String brand=intent.getStringExtra("MBrand");
+        String store=intent.getStringExtra("MBrand");
+        String coord=intent.getStringExtra("MCoord");
+        String mid = intent.getStringExtra("Mid");
         rev = new ArrayList<Review>();
-        rname = (TextView) findViewById(R.id.rname);
-        rname.setText(name);
-        rad = (TextView) findViewById(R.id.rad);
-        rad.setText(add);
-        rinfo = (TextView) findViewById(R.id.rinfo);
-        rinfo.setText(info);
-        rcui = (TextView) findViewById(R.id.rCui);
-        rcui.setText(cuisine);
-        rrev = (ListView)findViewById(R.id.rrev);
+        mname = (TextView) findViewById(R.id.mname);
+        mname.setText(name);
+        mad = (TextView) findViewById(R.id.mad);
+        mad.setText(add);
+        minfo = (TextView) findViewById(R.id.minfo);
+        minfo.setText(info);
+        mb = (TextView) findViewById(R.id.mB);
+        mb.setText(brand);
+        ms = (TextView) findViewById(R.id.mS);
+        ms.setText(store);
+        mrev = (ListView)findViewById(R.id.mrev);
         for(int i = 0; i<reviews.length; i++){
-            if(reviews[i].getEntityId().equalsIgnoreCase(rid)){
+            if(reviews[i].getEntityId().equalsIgnoreCase(mid)){
                 rev.add(reviews[i]);
             }
         }
         if (!rev.isEmpty()){
-            rrev.setAdapter(new ArrayAdapter<Review>(this,
+            mrev.setAdapter(new ArrayAdapter<Review>(this,
                     R.layout.list_item, rev) {
 
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View v = null;
                     if (v == null) {
-                        if (Restaurant_detail.this != null) {
-                            LayoutInflater vi = (LayoutInflater) Restaurant_detail.this
+                        if (Mall_detail.this != null) {
+                            LayoutInflater vi = (LayoutInflater) Mall_detail.this
                                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                             v = vi.inflate(R.layout.list_item, null);
                         }
@@ -94,14 +98,9 @@ public class Restaurant_detail extends AppCompatActivity {
             });
 
         }else{
-            rrev.setVisibility(View.GONE);
+            mrev.setVisibility(View.GONE);
         }
 
-
-
-
-
     }
-
 
 }
