@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_bar_detail"
+    tools:context="com.cs442.faaltene.touristassist.Bar_detail">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bname"
+        android:text="Bar Name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bad"
+        android:text="Bar Address"
+        android:layout_below="@+id/bname"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/binfo"
+        android:text="Bar Info"
+        android:layout_below="@+id/bad"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bDiscotv"
+        android:text="Bar Disco"
+        android:layout_below="@+id/binfo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bDisco"
+        android:text="Bar Disco"
+        android:layout_below="@+id/bDiscotv"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/blistlay"
+        android:layout_below="@id/bDisco"
+        android:layout_marginTop="40dp">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="403dp"
+            android:id="@+id/brev"></ListView>
+    </LinearLayout>
+
+</RelativeLayout>

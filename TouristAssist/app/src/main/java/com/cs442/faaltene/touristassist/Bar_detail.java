@@ -24,58 +24,59 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 
+import models.Club;
 import models.Hospital;
-import models.Restaurant;
 import models.Review;
 
-public class Hospital_detail extends AppCompatActivity {
+public class Bar_detail extends AppCompatActivity {
 
-    Hospital[] hospital;
+    Club[] club;
     String TAG = "Response";
     Review[] reviews;
-    TextView hname;
-    TextView had;
-    TextView hinfo;
-    ListView hrev;
+    TextView bname;
+    TextView bad;
+    TextView binfo;
+    ListView brev;
     TextView rating;
-    int hid2;
+    int bid2;
     Context mContext;
-    String hid;
+    String bid;
     TextView review;
     ArrayList<Review> rev;
-    ArrayAdapter<Review> revad;
-    TextView hspec;
+    ArrayAdapter<Review> bevad;
+    TextView bDisco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital_detail);
+        setContentView(R.layout.activity_bar_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         reviews = (Review[])intent.getSerializableExtra("reviews");
-        hname = (TextView)findViewById(R.id.hname);
-        had = (TextView)findViewById(R.id.had);
-        hinfo = (TextView)findViewById(R.id.hinfo);
-        hspec = (TextView)findViewById(R.id.hSpec);
-        String name = intent.getStringExtra("Hname");
-        String add=intent.getStringExtra("Had");
-        String info=intent.getStringExtra("Hinfo");
-        String specializations=intent.getStringExtra("HSpec");
-        String coord=intent.getStringExtra("HCoord");
-        hid = intent.getStringExtra("Hid");
-        hid2 = Integer.parseInt(hid);
+        bname = (TextView)findViewById(R.id.bname);
+        bad = (TextView)findViewById(R.id.bad);
+        binfo = (TextView)findViewById(R.id.binfo);
+        bDisco = (TextView)findViewById(R.id.bDisco);
+        String name = intent.getStringExtra("Cname");
+        String add=intent.getStringExtra("Cad");
+        String info=intent.getStringExtra("Cinfo");
+        String disco=intent.getStringExtra("CDisco");
+        String coord=intent.getStringExtra("CCoord");
+        bid = intent.getStringExtra("Cid");
+        bid2 = Integer.parseInt(bid);
         rev = new ArrayList<Review>();
-        hname = (TextView) findViewById(R.id.hname);
-        hname.setText(name);
-        had = (TextView) findViewById(R.id.had);
-        had.setText(add);
-        hinfo = (TextView) findViewById(R.id.hinfo);
-        hinfo.setText(info);
-        hspec = (TextView) findViewById(R.id.hSpec);
-        hspec.setText(specializations);
-        hrev = (ListView)findViewById(R.id.hrev);
+        bname = (TextView) findViewById(R.id.bname);
+        bname.setText(name);
+        bad = (TextView) findViewById(R.id.bad);
+        bad.setText(add);
+        binfo = (TextView) findViewById(R.id.binfo);
+        binfo.setText(info);
+        bDisco = (TextView) findViewById(R.id.bDisco);
+        bDisco.setText("Disco?: " + disco);
+        brev = (ListView)findViewById(R.id.brev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
     }
@@ -109,7 +110,7 @@ public class Hospital_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(hid)){
+                if(reviews[i].getEntityId().equalsIgnoreCase(bid)){
                     rev.add(reviews[i]);
                 }
             }
@@ -132,14 +133,14 @@ public class Hospital_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                hrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                brev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
                         if (v == null) {
-                            if (Hospital_detail.this != null) {
-                                LayoutInflater vi = (LayoutInflater) Hospital_detail.this
+                            if (Bar_detail.this != null) {
+                                LayoutInflater vi = (LayoutInflater) Bar_detail.this
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 v = vi.inflate(R.layout.list_item, null);
                             }
@@ -158,11 +159,12 @@ public class Hospital_detail extends AppCompatActivity {
                 });
 
             }else{
-                hrev.setVisibility(View.GONE);
+                brev.setVisibility(View.GONE);
             }
         }
 
     }
+
     public static Review[] parseReviews(SoapObject soap)
     {
         Review[] reviews = new Review[soap.getPropertyCount()];
@@ -179,6 +181,7 @@ public class Hospital_detail extends AppCompatActivity {
         }
         return reviews;
     }
+
     public void retrieveReviews() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getReviews";
         String METHOD_NAME = "getReviews";
@@ -187,8 +190,8 @@ public class Hospital_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            hid = hid2+"";
-            Request.addProperty("arg0" ,hid);
+            bid = bid2+"";
+            Request.addProperty("arg0" ,bid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);

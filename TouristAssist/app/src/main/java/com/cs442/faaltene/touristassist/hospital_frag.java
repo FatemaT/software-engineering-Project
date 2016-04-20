@@ -249,7 +249,7 @@ public class hospital_frag extends Fragment {
                     i.putExtra("Hname", hospitals[position].getHospitalName());
                     i.putExtra("Hinfo", hospitals[position].getHospitalDetails());
                     i.putExtra("Had", hospitals[position].getHospitalAddress());
-                    i.putExtra("HCui", hospitals[position].getSpecializations());
+                    i.putExtra("HSpec", hospitals[position].getSpecializations());
                     i.putExtra("HCoord", hospitals[position].getCoordinates());
                     i.putExtra("Hid", hospitals[position].getHospitalId());
                     startActivity(i);

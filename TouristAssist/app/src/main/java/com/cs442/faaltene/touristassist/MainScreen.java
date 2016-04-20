@@ -264,36 +264,6 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-
-
-    public void retrieveClubs() {
-        String SOAP_ACTION = "http://main.ta.se.cs.com/getClubs";
-        String METHOD_NAME = "getClubs";
-        String NAMESPACE = "http://main.ta.se.cs.com/";
-        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
-
-        try {
-            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,getCel);
-
-            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            soapEnvelope.setOutputSoapObject(Request);
-
-            HttpTransportSE transport = new HttpTransportSE(URL);
-
-            transport.call(SOAP_ACTION, soapEnvelope);
-
-            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
-            clubs = parseClubs(soapObject);
-
-            String re = clubs[0].getClubDetails();
-
-            Log.i(TAG, "Result : " + re);
-        } catch (Exception ex) {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
-    }
-
     public void retrieveAttractions() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getAttractions";
         String METHOD_NAME = "getAttractions";
@@ -386,28 +356,6 @@ public class MainScreen extends AppCompatActivity {
             malls[i] = mall;
         }
         return malls;
-    }
-
-
-
-    public static Club[] parseClubs(SoapObject soap)
-    {
-        Club[] clubs = new Club[soap.getPropertyCount()];
-        for (int i = 0; i < clubs.length; i++) {
-            SoapObject pii = (SoapObject)soap.getProperty(i);
-            Club club = new Club();
-
-            club.setCity(pii.getProperty(0).toString());
-            club.setCityId(pii.getProperty(1).toString());
-            club.setClubAddress(pii.getProperty(2).toString());
-            club.setClubDetails(pii.getProperty(3).toString());
-            club.setClubId(pii.getProperty(4).toString());
-            club.setClubName(pii.getProperty(5).toString());
-            club.setClub_disc(pii.getProperty(6).toString());
-            club.setCoordinates(pii.getProperty(7).toString());
-            clubs[i]=club;
-        }
-        return clubs;
     }
 
 
