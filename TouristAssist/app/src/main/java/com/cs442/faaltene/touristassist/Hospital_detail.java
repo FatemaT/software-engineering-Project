@@ -131,7 +131,7 @@ public class Hospital_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
-            if (!rev.isEmpty()){
+            //if (!rev.isEmpty()){
                 hrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
@@ -157,9 +157,7 @@ public class Hospital_detail extends AppCompatActivity {
 
                 });
 
-            }else{
-                hrev.setVisibility(View.GONE);
-            }
+           // }
         }
 
     }
@@ -187,7 +185,7 @@ public class Hospital_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            hid = hid2+"";
+ //           hid = hid2+"";
             Request.addProperty("arg0" ,hid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

@@ -132,7 +132,7 @@ public class Bar_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
-            if (!rev.isEmpty()){
+            //if (!rev.isEmpty()){
                 brev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
@@ -158,9 +158,9 @@ public class Bar_detail extends AppCompatActivity {
 
                 });
 
-            }else{
+            /*}else{
                 brev.setVisibility(View.GONE);
-            }
+            }*/
         }
 
     }
@@ -190,7 +190,7 @@ public class Bar_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            bid = bid2+"";
+           // bid = bid2+"";
             Request.addProperty("arg0" ,bid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
