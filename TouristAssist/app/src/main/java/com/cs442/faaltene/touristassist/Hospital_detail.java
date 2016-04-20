@@ -59,23 +59,23 @@ public class Hospital_detail extends AppCompatActivity {
         had = (TextView)findViewById(R.id.had);
         hinfo = (TextView)findViewById(R.id.hinfo);
         hspec = (TextView)findViewById(R.id.hSpec);
-        String name = intent.getStringExtra("Rname");
-        String add=intent.getStringExtra("Rad");
-        String info=intent.getStringExtra("Rinfo");
-        String cuisine=intent.getStringExtra("RCui");
-        String coord=intent.getStringExtra("RCoord");
-        hid = intent.getStringExtra("Rid");
+        String name = intent.getStringExtra("Hname");
+        String add=intent.getStringExtra("Had");
+        String info=intent.getStringExtra("Hinfo");
+        String cuisine=intent.getStringExtra("HCui");
+        String coord=intent.getStringExtra("HCoord");
+        hid = intent.getStringExtra("Hid");
         hid2 = Integer.parseInt(hid);
         rev = new ArrayList<Review>();
-        hname = (TextView) findViewById(R.id.rname);
+        hname = (TextView) findViewById(R.id.hname);
         hname.setText(name);
-        had = (TextView) findViewById(R.id.rad);
+        had = (TextView) findViewById(R.id.had);
         had.setText(add);
-        hinfo = (TextView) findViewById(R.id.rinfo);
+        hinfo = (TextView) findViewById(R.id.hinfo);
         hinfo.setText(info);
-        hspec = (TextView) findViewById(R.id.rCui);
+        hspec = (TextView) findViewById(R.id.hSpec);
         hspec.setText(cuisine);
-        hrev = (ListView)findViewById(R.id.rrev);
+        hrev = (ListView)findViewById(R.id.hrev);
     }
 
     @Override

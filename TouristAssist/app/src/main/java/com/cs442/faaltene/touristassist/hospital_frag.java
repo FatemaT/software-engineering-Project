@@ -100,15 +100,9 @@ public class hospital_frag extends Fragment {
         ((MainNavigation) getActivity()).setActionBarTitle("Hospitals");
         rootView = inflater.inflate(R.layout.fragment_hospital_frag, container, false);
         hos = new ArrayList<String>();
-        hospitals = (Hospital[]) getArguments().getSerializable("hospitals");
 
         hospital = (ListView)rootView.findViewById(R.id.hospital_list);
 
-        for (int i = 0; i<hospitals.length; i++){
-            hos.add(hospitals[i].getHospitalName());
-        }
-        hosad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, hos);
-        hospital.setAdapter(hosad);
         return rootView;
     }
 
@@ -248,7 +242,7 @@ public class hospital_frag extends Fragment {
             hospital.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent i = new Intent(mContext, Restaurant_detail.class);
+                    Intent i = new Intent(mContext, Hospital_detail.class);
                     //i.putExtra("reviews",reviews);
 
                     i.putExtra("hospital", hospitals[position]);
