@@ -113,9 +113,8 @@ public class Restaurant_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(rid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -135,12 +134,15 @@ public class Restaurant_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
+
             if (!rev.isEmpty()){
-                rrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                rrev.setVisibility(View.VISIBLE);
+                revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Restaurant_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Restaurant_detail.this
@@ -159,8 +161,10 @@ public class Restaurant_detail extends AppCompatActivity {
                     }
 
 
-                });
-
+                };
+                rrev.setAdapter(revad);
+                rrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
             }else{
                 rrev.setVisibility(View.GONE);
             }

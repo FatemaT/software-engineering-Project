@@ -102,9 +102,8 @@ public class Mall_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(mid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -125,11 +124,13 @@ public class Mall_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                mrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                mrev.setVisibility(View.VISIBLE);
+                revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Mall_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Mall_detail.this
@@ -148,7 +149,9 @@ public class Mall_detail extends AppCompatActivity {
                     }
 
 
-                });
+                };
+                mrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
 
             }else{
                 mrev.setVisibility(View.GONE);
