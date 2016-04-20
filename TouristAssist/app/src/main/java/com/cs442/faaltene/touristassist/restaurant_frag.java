@@ -3,9 +3,11 @@ package com.cs442.faaltene.touristassist;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import java.util.ArrayList;
 
+import models.City;
 import models.Restaurant;
 import models.Review;
 
@@ -33,11 +41,16 @@ public class restaurant_frag extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     Context mContext;
+    String TAG = "Response";
     ListView restaurant;
+    int cid;
+    String cityname;
     Restaurant[] restaurants;
     Review[] reviews;
     ArrayList<String> rest;
+    String cityid;
     View rootView;
+    City city;
     ArrayAdapter<String> restad;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -86,9 +99,16 @@ public class restaurant_frag extends Fragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         rootView = inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
         rest = new ArrayList<String>();
-        restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
-        reviews = (Review[])getArguments().getSerializable("reviews");
-        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
+        city = (City) getArguments().getSerializable("city");
+        cityid = city.getCityId();
+        cityname = city.getCityName();
+        Log.i(TAG, "Result : " + cityname);
+        cid = Integer.parseInt(cityid);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
+        //restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
+        //reviews = (Review[])getArguments().getSerializable("reviews");
+/*        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
         for (int i = 0; i<restaurants.length; i++){
             rest.add(restaurants[i].getRestaurantName());
         }
@@ -99,7 +119,7 @@ public class restaurant_frag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(mContext, Restaurant_detail.class);
-                i.putExtra("reviews",reviews);
+                //i.putExtra("reviews",reviews);
                 i.putExtra("restaurant",restaurants[position]);
                 i.putExtra("Rname",restaurants[position].getRestaurantName());
                 i.putExtra("Rinfo",restaurants[position].getRestaurantDetails());
@@ -110,11 +130,47 @@ public class restaurant_frag extends Fragment {
                 startActivity(i);
 
             }
-        });
+        });*/
         return rootView;
 
     }
+    private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected void onPreExecute() {
+            Log.i(TAG, "onPreExecute");
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.i(TAG, "doInBackground");
+            //retrieveShowtimes();
+            //retrieveHotels();
+            retrieveRestaurants();
+            //retrieveMalls();
+            //retrieveHospitals();
+            //retrieveClubs();
+            //retrieveAttractions();
+            //retrieveReviews();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            Log.i(TAG, "onPostExecute");
+            //i.putExtra("city", city);
+            //i.putExtra("hotels", hotels);
+            //i.putExtra("hospitals",hospitals);
+            //i.putExtra("showtimes",showtimes);
+            //i.putExtra("restaurants", restaurants);
+            //i.putExtra("malls",malls);
+            //i.putExtra("clubs",clubs);
+            //i.putExtra("reviews",reviews);
+            //startActivity(i);
+            // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
+        }
+
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -152,5 +208,53 @@ public class restaurant_frag extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    public void retrieveRestaurants() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getRestaurants";
+        String METHOD_NAME = "getRestaurants";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,cityname);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            restaurants = parseRestaurants(soapObject);
+
+            String re = restaurants[0].getRestaurantCusines();
+            //System.out.println("*************" +re);
+
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+    public static Restaurant[] parseRestaurants(SoapObject soap)
+    {
+        Restaurant[] restaurants = new Restaurant[soap.getPropertyCount()];
+        for (int i = 0; i < restaurants.length; i++) {
+            SoapObject pii = (SoapObject)soap.getProperty(i);
+            Restaurant restaurant = new Restaurant();
+
+            restaurant.setCity(pii.getProperty(0).toString());
+            restaurant.setCityId(pii.getProperty(1).toString());
+            restaurant.setCoordinates(pii.getProperty(2).toString());
+            restaurant.setRestaurantAddress(pii.getProperty(3).toString());
+            restaurant.setRestaurantCusines(pii.getProperty(4).toString());
+            restaurant.setRestaurantDetails(pii.getProperty(5).toString());
+            restaurant.setRestaurantId(pii.getProperty(6).toString());
+            restaurant.setRestaurantName(pii.getProperty(7).toString());
+            restaurants[i] = restaurant;
+        }
+        return restaurants;
     }
 }

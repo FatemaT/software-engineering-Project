@@ -232,35 +232,7 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-    public void retrieveRestaurants() {
-        String SOAP_ACTION = "http://main.ta.se.cs.com/getRestaurants";
-        String METHOD_NAME = "getRestaurants";
-        String NAMESPACE = "http://main.ta.se.cs.com/";
-        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
 
-        try {
-            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,getCel);
-
-            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            soapEnvelope.setOutputSoapObject(Request);
-
-            HttpTransportSE transport = new HttpTransportSE(URL);
-
-            transport.call(SOAP_ACTION, soapEnvelope);
-
-            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
-            restaurants = parseRestaurants(soapObject);
-
-            String re = restaurants[0].getRestaurantCusines();
-            //System.out.println("*************" +re);
-
-
-            Log.i(TAG, "Result : " + re);
-        } catch (Exception ex) {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
-    }
 
     public void retrieveMalls() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getMalls";
@@ -447,25 +419,7 @@ public class MainScreen extends AppCompatActivity {
         return showtimes;
     }
 
-    public static Restaurant[] parseRestaurants(SoapObject soap)
-    {
-        Restaurant[] restaurants = new Restaurant[soap.getPropertyCount()];
-        for (int i = 0; i < restaurants.length; i++) {
-            SoapObject pii = (SoapObject)soap.getProperty(i);
-            Restaurant restaurant = new Restaurant();
 
-            restaurant.setCity(pii.getProperty(0).toString());
-            restaurant.setCityId(pii.getProperty(1).toString());
-            restaurant.setCoordinates(pii.getProperty(2).toString());
-            restaurant.setRestaurantAddress(pii.getProperty(3).toString());
-            restaurant.setRestaurantCusines(pii.getProperty(4).toString());
-            restaurant.setRestaurantDetails(pii.getProperty(5).toString());
-            restaurant.setRestaurantId(pii.getProperty(6).toString());
-            restaurant.setRestaurantName(pii.getProperty(7).toString());
-            restaurants[i] = restaurant;
-        }
-        return restaurants;
-    }
 
     public static Mall[] parseMalls(SoapObject soap)
     {
