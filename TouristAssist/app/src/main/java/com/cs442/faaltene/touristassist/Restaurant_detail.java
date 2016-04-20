@@ -64,7 +64,7 @@ public class Restaurant_detail extends AppCompatActivity {
         String cuisine=intent.getStringExtra("RCui");
         String coord=intent.getStringExtra("RCoord");
         rid = intent.getStringExtra("Rid");
-        rid2 = Integer.parseInt(rid);
+        //rid2 = Integer.parseInt(rid);
         rev = new ArrayList<Review>();
         rname = (TextView) findViewById(R.id.rname);
         rname.setText(name);

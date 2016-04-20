@@ -29,6 +29,10 @@
             android:label="@string/title_activity_restaurant_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Show_detail"
+            android:label="Show Detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Mall_detail"
             android:label="@string/title_activity_mall_detail"
             android:theme="@style/AppTheme.NoActionBar" />
