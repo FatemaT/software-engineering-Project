@@ -87,6 +87,13 @@ public class mall_frag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        city = (City) getArguments().getSerializable("city");
+        cityid = city.getCityId();
+        cityname = city.getCityName();
+        Log.i(TAG, "Result : " + cityname);
+        cid = Integer.parseInt(cityid);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
     }
 
     @Override
