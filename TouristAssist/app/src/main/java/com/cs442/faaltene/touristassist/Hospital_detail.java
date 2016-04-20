@@ -75,7 +75,7 @@ public class Hospital_detail extends AppCompatActivity {
         hinfo.setText(info);
         hspec = (TextView) findViewById(R.id.hSpec);
         hspec.setText(specializations);
-        hrev = (ListView)findViewById(R.id.hrev);
+        //hrev = (ListView)findViewById(R.id.hrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
     }
@@ -95,6 +95,7 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             Log.i(TAG, "onPreExecute");
+            hrev = (ListView)findViewById(R.id.hrev);
         }
 
         @Override
@@ -109,9 +110,7 @@ public class Hospital_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(hid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
             }
             //retrieveCity();
             return null;
@@ -120,6 +119,7 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
+
             //i.putExtra("city", city);
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
@@ -131,12 +131,16 @@ public class Hospital_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
-            //if (!rev.isEmpty()){
-                hrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+            Log.i("Enters","1");
+            if (!rev.isEmpty()){
+                Log.i("Enters","2");
+                hrev.setVisibility(View.VISIBLE);
+                revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Hospital_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Hospital_detail.this
@@ -155,9 +159,12 @@ public class Hospital_detail extends AppCompatActivity {
                     }
 
 
-                });
-
-           // }
+                };
+                hrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
+            }else{
+                hrev.setVisibility(View.GONE);
+            }
         }
 
     }
