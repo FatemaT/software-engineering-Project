@@ -87,6 +87,13 @@ public class restaurant_frag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        city = (City) getArguments().getSerializable("city");
+        cityid = city.getCityId();
+        cityname = city.getCityName();
+        Log.i(TAG, "Result : " + cityname);
+        cid = Integer.parseInt(cityid);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
     }
@@ -99,13 +106,8 @@ public class restaurant_frag extends Fragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         rootView = inflater.inflate(R.layout.fragment_restaurant_frag, container, false);
         rest = new ArrayList<String>();
-        city = (City) getArguments().getSerializable("city");
-        cityid = city.getCityId();
-        cityname = city.getCityName();
-        Log.i(TAG, "Result : " + cityname);
-        cid = Integer.parseInt(cityid);
-        AsyncCallWS task = new AsyncCallWS();
-        task.execute();
+
+
         //restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
         //reviews = (Review[])getArguments().getSerializable("reviews");
 /*        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
