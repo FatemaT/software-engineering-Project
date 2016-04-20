@@ -24,6 +24,7 @@ import android.widget.TextView;
 import org.w3c.dom.Attr;
 
 import models.Attraction;
+import models.City;
 import models.Club;
 import models.Hospital;
 import models.Hotel;
@@ -39,14 +40,15 @@ public class MainNavigation extends AppCompatActivity
         mall_frag.OnFragmentInteractionListener, museum_frag.OnFragmentInteractionListener,
         show_frag.OnFragmentInteractionListener{
         TextView city;
-    Hotel[] hotels;
+    /*Hotel[] hotels;
     Showtime[] showtimes;
     Restaurant[] restaurants;
     Mall[] malls;
     Hospital[] hospitals;
     Club[] clubs;
     Attraction[] attractions;
-    Review[] reviews;
+    Review[] reviews;*/
+    City citym;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,15 +57,16 @@ public class MainNavigation extends AppCompatActivity
         setSupportActionBar(toolbar);
         Intent i= getIntent();
         city = (TextView) findViewById(R.id.citytv);
-        String citys = i.getStringExtra("city");
-        hotels = (Hotel[]) i.getSerializableExtra("hotels");
+        citym = (City)i.getSerializableExtra("city");
+        String citys = citym.getCityName();
+        /*hotels = (Hotel[]) i.getSerializableExtra("hotels");
         showtimes = (Showtime[]) i.getSerializableExtra("showtimes");
         restaurants= (Restaurant[]) i.getSerializableExtra("restaurants");
         malls= (Mall[]) i.getSerializableExtra("malls");
         hospitals=(Hospital[]) i.getSerializableExtra("hospitals");
         clubs=(Club[]) i.getSerializableExtra("clubs");
         attractions = (Attraction[]) i.getSerializableExtra("attractions");
-        reviews = (Review[]) i.getSerializableExtra("reviews");
+        reviews = (Review[]) i.getSerializableExtra("reviews");*/
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
         city.setText("City of " + citys);
@@ -121,32 +124,25 @@ public class MainNavigation extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (id == R.id.nav_restaurant) {//handle restaurant fragment
             fragmentClass = restaurant_frag.class;
-            b.putSerializable("restaurants", restaurants);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_bar) {//handle bar fragment
             fragmentClass = bar_frag.class;
-            b.putSerializable("clubs", clubs);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_hotel) {//handle hotel fragment
             fragmentClass = hotel_frag.class;
-            b.putSerializable("hotels", hotels);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_malls) {//handle mall fragment
             fragmentClass = mall_frag.class;
-            b.putSerializable("malls", malls);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_museum) {//handle museum fragment
             fragmentClass = museum_frag.class;
-            b.putSerializable("attractions", attractions);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_hospital) {//handle hospital fragment
             fragmentClass = hospital_frag.class;
-            b.putSerializable("hospitals", hospitals);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_shows) {//handle show fragment
             fragmentClass = show_frag.class;
-            b.putSerializable("showtimes", showtimes);
-            b.putSerializable("reviews",reviews);
+            b.putSerializable("city",citym);
         } else if (id == R.id.nav_share) {//handle restaurant fragment
 
         } else if (id == R.id.nav_send) {

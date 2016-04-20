@@ -64,7 +64,6 @@ public class MainScreen extends AppCompatActivity {
                 cityName = (EditText) findViewById(R.id.cityName);
                 i = new Intent(MainScreen.this, MainNavigation.class);
                 getCel = cityName.getText().toString();
-                i.putExtra("city", getCel);
                 //startActivity(i);
                 AsyncCallWS task = new AsyncCallWS();
                 task.execute();
@@ -104,14 +103,14 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Log.i(TAG, "doInBackground");
-            retrieveShowtimes();
-            retrieveHotels();
-            retrieveRestaurants();
-            retrieveMalls();
-            retrieveHospitals();
-            retrieveClubs();
-            retrieveAttractions();
-            retrieveReviews();
+            //retrieveShowtimes();
+            //retrieveHotels();
+            //retrieveRestaurants();
+            //retrieveMalls();
+            //retrieveHospitals();
+            //retrieveClubs();
+            //retrieveAttractions();
+            //retrieveReviews();
             retrieveCity();
             return null;
         }
@@ -119,7 +118,7 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-
+            i.putExtra("city", city);
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
             //i.putExtra("showtimes",showtimes);
@@ -127,41 +126,21 @@ public class MainScreen extends AppCompatActivity {
             //i.putExtra("malls",malls);
             //i.putExtra("clubs",clubs);
             //i.putExtra("reviews",reviews);
-
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
 
     }
-
-    public void retrieveHotels() {
-        String SOAP_ACTION = "http://main.ta.se.cs.com/getHotels";
-        String METHOD_NAME = "getHotels";
-        String NAMESPACE = "http://main.ta.se.cs.com/";
-        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
-
-        try {
-            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg1" ,getCel);
-
-            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            soapEnvelope.setOutputSoapObject(Request);
-
-            HttpTransportSE transport = new HttpTransportSE(URL);
-
-            transport.call(SOAP_ACTION, soapEnvelope);
-
-            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
-            hotels = parseHotels(soapObject);
-
-            String re = soapObject.getProperty(0).toString();
-            // System.out.println("*************" +re);
+    public static City parseCity(SoapObject soap)
+    {
+        City city = new City();
+        SoapObject pii = (SoapObject)soap.getProperty(0);
+        city.setCityId(pii.getProperty(0).toString());
+        city.setCityName(pii.getProperty(1).toString());
+        city.setCoordinates(pii.getProperty(2).toString());
 
 
-            Log.i(TAG, "Result : " + re);
-        } catch (Exception ex) {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
+        return city;
     }
     public void retrieveCity() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getCityFromCityName";
@@ -192,6 +171,36 @@ public class MainScreen extends AppCompatActivity {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
+    /*public void retrieveHotels() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getHotels";
+        String METHOD_NAME = "getHotels";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg1" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            hotels = parseHotels(soapObject);
+
+            String re = soapObject.getProperty(0).toString();
+            // System.out.println("*************" +re);
+
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
 
     public void retrieveShowtimes() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getShowtimes";
@@ -535,17 +544,6 @@ public class MainScreen extends AppCompatActivity {
         }
         return reviews;
     }
-    public static City parseCity(SoapObject soap)
-    {
-        City city = new City();
-        SoapObject pii = (SoapObject)soap.getProperty(0);
-        city.setCityId(pii.getProperty(0).toString());
-        city.setCityName(pii.getProperty(1).toString());
-        city.setCoordinates(pii.getProperty(2).toString());
-
-
-        return city;
-    }
 
     public static Attraction[] parseAttractions(SoapObject soap)
     {
@@ -567,6 +565,6 @@ public class MainScreen extends AppCompatActivity {
 
         }
         return attractions;
-    }
+    }*/
 
 }
