@@ -264,33 +264,7 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-    public void retrieveHospitals() {
-        String SOAP_ACTION = "http://main.ta.se.cs.com/getHospitals";
-        String METHOD_NAME = "getHospitals";
-        String NAMESPACE = "http://main.ta.se.cs.com/";
-        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
 
-        try {
-            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,getCel);
-
-            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            soapEnvelope.setOutputSoapObject(Request);
-
-            HttpTransportSE transport = new HttpTransportSE(URL);
-
-            transport.call(SOAP_ACTION, soapEnvelope);
-
-            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
-            hospitals = parseHospitals(soapObject);
-
-            String re = hospitals[0].getSpecializations();
-
-            Log.i(TAG, "Result : " + re);
-        } catch (Exception ex) {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
-    }
 
     public void retrieveClubs() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getClubs";
@@ -414,26 +388,7 @@ public class MainScreen extends AppCompatActivity {
         return malls;
     }
 
-    public static Hospital[] parseHospitals(SoapObject soap)
-    {
-        Hospital[] hospitals = new Hospital[soap.getPropertyCount()];
-        for (int i = 0; i < hospitals.length; i++) {
-            SoapObject pii = (SoapObject)soap.getProperty(i);
-            Hospital hospital = new Hospital();
 
-            hospital.setCity(pii.getProperty(0).toString());
-            hospital.setCityId(pii.getProperty(1).toString());
-            hospital.setCoordinates(pii.getProperty(2).toString());
-            hospital.setHospitalAddress(pii.getProperty(3).toString());
-            hospital.setHospitalDetails(pii.getProperty(4).toString());
-            hospital.setHospitalId(pii.getProperty(5).toString());
-            hospital.setHospitalName(pii.getProperty(6).toString());
-            hospital.setSpecializations(pii.getProperty(7).toString());
-            hospitals[i] = hospital;
-
-        }
-        return hospitals;
-    }
 
     public static Club[] parseClubs(SoapObject soap)
     {
