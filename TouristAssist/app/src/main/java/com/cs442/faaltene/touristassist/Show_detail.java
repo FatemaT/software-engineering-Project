@@ -77,8 +77,9 @@ public class Show_detail extends AppCompatActivity {
         Sdur = (TextView) findViewById(R.id.sdur);
         Sdur.setText(dur);
         Srev = (ListView)findViewById(R.id.srev);
-        Sshows.setText(shows);
         Sshows = (TextView) findViewById(R.id.sshows);
+        Sshows.setText(shows);
+
 
 
 

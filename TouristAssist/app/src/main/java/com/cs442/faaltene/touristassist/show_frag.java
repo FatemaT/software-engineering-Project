@@ -152,7 +152,7 @@ public class show_frag extends Fragment {
             showtime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent i = new Intent(mContext, Restaurant_detail.class);
+                    Intent i = new Intent(mContext, Show_detail.class);
                     //i.putExtra("reviews",reviews);
                     i.putExtra("showtime", showtimes[position]);
                     i.putExtra("Sname", showtimes[position].getShowtimeName());
