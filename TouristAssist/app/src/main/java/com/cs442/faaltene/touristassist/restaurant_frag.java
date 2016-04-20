@@ -96,8 +96,8 @@ public class restaurant_frag extends Fragment {
         task.execute();
 
 
-    }
 
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,32 +110,13 @@ public class restaurant_frag extends Fragment {
 
         //restaurants = (Restaurant[]) getArguments().getSerializable("restaurants");
         //reviews = (Review[])getArguments().getSerializable("reviews");
-/*        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
-        for (int i = 0; i<restaurants.length; i++){
-            rest.add(restaurants[i].getRestaurantName());
-        }
-        restad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, rest);
-        restaurant.setAdapter(restad);
-        mContext = getActivity().getApplicationContext();
-        restaurant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(mContext, Restaurant_detail.class);
-                //i.putExtra("reviews",reviews);
-                i.putExtra("restaurant",restaurants[position]);
-                i.putExtra("Rname",restaurants[position].getRestaurantName());
-                i.putExtra("Rinfo",restaurants[position].getRestaurantDetails());
-                i.putExtra("Rad",restaurants[position].getRestaurantAddress());
-                i.putExtra("RCui",restaurants[position].getRestaurantCusines());
-                i.putExtra("RCoord",restaurants[position].getCoordinates());
-                i.putExtra("Rid",restaurants[position].getRestaurantId());
-                startActivity(i);
+        restaurant = (ListView)rootView.findViewById(R.id.restaurant_list);
 
-            }
-        });*/
         return rootView;
 
     }
+
+
     private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -149,11 +130,16 @@ public class restaurant_frag extends Fragment {
             //retrieveShowtimes();
             //retrieveHotels();
             retrieveRestaurants();
+            for (int i = 0; i<restaurants.length; i++){
+                rest.add(restaurants[i].getRestaurantName());
+            }
             //retrieveMalls();
             //retrieveHospitals();
             //retrieveClubs();
             //retrieveAttractions();
             //retrieveReviews();
+
+
             return null;
         }
 
@@ -170,6 +156,25 @@ public class restaurant_frag extends Fragment {
             //i.putExtra("reviews",reviews);
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
+            restad = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, rest);
+            restaurant.setAdapter(restad);
+            mContext = getActivity().getApplicationContext();
+            restaurant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent i = new Intent(mContext, Restaurant_detail.class);
+                    //i.putExtra("reviews",reviews);
+                    i.putExtra("restaurant", restaurants[position]);
+                    i.putExtra("Rname", restaurants[position].getRestaurantName());
+                    i.putExtra("Rinfo", restaurants[position].getRestaurantDetails());
+                    i.putExtra("Rad", restaurants[position].getRestaurantAddress());
+                    i.putExtra("RCui", restaurants[position].getRestaurantCusines());
+                    i.putExtra("RCoord", restaurants[position].getCoordinates());
+                    i.putExtra("Rid", restaurants[position].getRestaurantId());
+                    startActivity(i);
+
+                }
+            });
         }
 
     }
@@ -219,7 +224,9 @@ public class restaurant_frag extends Fragment {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,cityname);
+            cityid = cid+"";
+
+            Request.addProperty("arg0" ,cityid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);
