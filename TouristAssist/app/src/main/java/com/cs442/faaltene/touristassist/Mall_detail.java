@@ -79,6 +79,8 @@ public class Mall_detail extends AppCompatActivity {
         ms = (TextView) findViewById(R.id.mS);
         ms.setText(store);
         mrev = (ListView)findViewById(R.id.mrev);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
 
