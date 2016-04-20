@@ -20,6 +20,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import models.City;
 import models.Hospital;
 import models.Hotel;
 import models.Mall;
@@ -36,7 +37,7 @@ public class MainScreen extends AppCompatActivity {
 
     String getCel;
     Intent i;
-
+    City city;
     Hotel[] hotels;
     Showtime[] showtimes;
     Restaurant[] restaurants;
@@ -107,20 +108,20 @@ public class MainScreen extends AppCompatActivity {
             retrieveHospitals();
             retrieveClubs();
             retrieveReviews();
-
+            retrieveCity();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            i.putExtra("hotels", hotels);
-            i.putExtra("hospitals",hospitals);
-            i.putExtra("showtimes",showtimes);
-            i.putExtra("restaurants", restaurants);
-            i.putExtra("malls",malls);
-            i.putExtra("clubs",clubs);
-            i.putExtra("reviews",reviews);
+            //i.putExtra("hotels", hotels);
+            //i.putExtra("hospitals",hospitals);
+            //i.putExtra("showtimes",showtimes);
+            //i.putExtra("restaurants", restaurants);
+            //i.putExtra("malls",malls);
+            //i.putExtra("clubs",clubs);
+            //i.putExtra("reviews",reviews);
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
@@ -135,7 +136,7 @@ public class MainScreen extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,getCel);
+            Request.addProperty("arg1" ,getCel);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);
@@ -156,7 +157,35 @@ public class MainScreen extends AppCompatActivity {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
+    public void retrieveCity() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getCityFromCityName";
+        String METHOD_NAME = "getCityFromCityName";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
 
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            city = parseCity(soapObject);
+
+            String re = soapObject.getProperty(0).toString();
+            // System.out.println("*************" +re);
+
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
 
     public void retrieveShowtimes() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getShowtimes";
@@ -470,6 +499,17 @@ public class MainScreen extends AppCompatActivity {
 
         }
         return reviews;
+    }
+    public static City parseCity(SoapObject soap)
+    {
+        City city = new City();
+        SoapObject pii = (SoapObject)soap.getProperty(0);
+        city.setCityId(pii.getProperty(0).toString());
+        city.setCityName(pii.getProperty(1).toString());
+        city.setCoordinates(pii.getProperty(2).toString());
+
+
+        return city;
     }
 
 }
