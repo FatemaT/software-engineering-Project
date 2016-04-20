@@ -75,6 +75,8 @@ public class Restaurant_detail extends AppCompatActivity {
         rcui = (TextView) findViewById(R.id.rCui);
         rcui.setText(cuisine);
         rrev = (ListView)findViewById(R.id.rrev);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
 
