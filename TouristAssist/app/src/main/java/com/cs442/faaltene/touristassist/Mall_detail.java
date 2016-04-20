@@ -180,7 +180,7 @@ public class Mall_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            mid = mid2+"";
+
             Request.addProperty("arg0" ,mid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
