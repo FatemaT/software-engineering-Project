@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.w3c.dom.Attr;
+
+import models.Attraction;
 import models.Club;
 import models.Hospital;
 import models.Hotel;
@@ -41,6 +45,7 @@ public class MainNavigation extends AppCompatActivity
     Mall[] malls;
     Hospital[] hospitals;
     Club[] clubs;
+    Attraction[] attractions;
     Review[] reviews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class MainNavigation extends AppCompatActivity
         malls= (Mall[]) i.getSerializableExtra("malls");
         hospitals=(Hospital[]) i.getSerializableExtra("hospitals");
         clubs=(Club[]) i.getSerializableExtra("clubs");
+        attractions = (Attraction[]) i.getSerializableExtra("attractions");
         reviews = (Review[]) i.getSerializableExtra("reviews");
         Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
         city.setTypeface(tf);
@@ -131,6 +137,8 @@ public class MainNavigation extends AppCompatActivity
             b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_museum) {//handle museum fragment
             fragmentClass = museum_frag.class;
+            b.putSerializable("attractions", attractions);
+            b.putSerializable("reviews",reviews);
         } else if (id == R.id.nav_hospital) {//handle hospital fragment
             fragmentClass = hospital_frag.class;
             b.putSerializable("hospitals", hospitals);

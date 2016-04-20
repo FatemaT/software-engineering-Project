@@ -20,7 +20,11 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+<<<<<<< HEAD
 import models.City;
+=======
+import models.Attraction;
+>>>>>>> origin/master
 import models.Hospital;
 import models.Hotel;
 import models.Mall;
@@ -45,6 +49,7 @@ public class MainScreen extends AppCompatActivity {
     Hospital[] hospitals;
     Club[] clubs;
     Review[] reviews;
+    Attraction[] attractions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,7 @@ public class MainScreen extends AppCompatActivity {
             retrieveMalls();
             retrieveHospitals();
             retrieveClubs();
+            retrieveAttractions();
             retrieveReviews();
             retrieveCity();
             return null;
@@ -115,6 +121,7 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
+<<<<<<< HEAD
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
             //i.putExtra("showtimes",showtimes);
@@ -122,6 +129,16 @@ public class MainScreen extends AppCompatActivity {
             //i.putExtra("malls",malls);
             //i.putExtra("clubs",clubs);
             //i.putExtra("reviews",reviews);
+=======
+            i.putExtra("hotels", hotels);
+            i.putExtra("hospitals",hospitals);
+            i.putExtra("showtimes",showtimes);
+            i.putExtra("restaurants", restaurants);
+            i.putExtra("malls",malls);
+            i.putExtra("clubs",clubs);
+            i.putExtra("attractions",attractions);
+            i.putExtra("reviews",reviews);
+>>>>>>> origin/master
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
@@ -332,6 +349,35 @@ public class MainScreen extends AppCompatActivity {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
+
+    public void retrieveAttractions() {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/getAttractions";
+        String METHOD_NAME = "getAttractions";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            Request.addProperty("arg0" ,getCel);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            attractions = parseAttractions(soapObject);
+
+            String re = attractions[0].getAttractionDetails();
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
     public void retrieveReviews() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getReviews";
         String METHOD_NAME = "getReviews";
@@ -510,6 +556,28 @@ public class MainScreen extends AppCompatActivity {
 
 
         return city;
+    }
+
+    public static Attraction[] parseAttractions(SoapObject soap)
+    {
+        Attraction[] attractions = new Attraction[soap.getPropertyCount()];
+        for (int i = 0; i < attractions.length; i++) {
+            SoapObject pii = (SoapObject)soap.getProperty(i);
+            Attraction attraction = new Attraction();
+
+            attraction.setAttractionId(pii.getProperty(0).toString());
+            attraction.setAttractionName(pii.getProperty(1).toString());
+            attraction.setAttractionAddress(pii.getProperty(2).toString());
+            attraction.setAttractionDetails(pii.getProperty(3).toString());
+            attraction.setCoordinates(pii.getProperty(4).toString());
+            attraction.setFee(pii.getProperty(5).toString());
+            attraction.setCity(pii.getProperty(6).toString());
+            attraction.setCityId(pii.getProperty(7).toString());
+
+            attractions[i] = attraction;
+
+        }
+        return attractions;
     }
 
 }
