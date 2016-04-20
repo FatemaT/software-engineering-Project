@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/navbackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.cs442.faaltene.touristassist.Show_detail"
+    tools:showIn="@layout/activity_show_detail">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sname"
+        android:text="Show Time Name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sad"
+        android:text="Show Time Address"
+        android:layout_below="@+id/sname"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sinfo"
+        android:text="Show Time Info"
+        android:layout_below="@+id/sad"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sdur"
+        android:text="Show Time Duration"
+        android:layout_below="@+id/sinfo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sshows"
+        android:text="Show Time Shows"
+        android:layout_below="@+id/sdur"/>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlistlay"
+        android:layout_below="@id/mS"
+        android:layout_marginTop="40dp">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="365dp"
+            android:id="@+id/srev"></ListView>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
