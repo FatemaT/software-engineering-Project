@@ -19,12 +19,10 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-
-<<<<<<< HEAD
 import models.City;
-=======
+
 import models.Attraction;
->>>>>>> origin/master
+
 import models.Hospital;
 import models.Hotel;
 import models.Mall;
@@ -121,7 +119,7 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-<<<<<<< HEAD
+
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
             //i.putExtra("showtimes",showtimes);
@@ -129,16 +127,7 @@ public class MainScreen extends AppCompatActivity {
             //i.putExtra("malls",malls);
             //i.putExtra("clubs",clubs);
             //i.putExtra("reviews",reviews);
-=======
-            i.putExtra("hotels", hotels);
-            i.putExtra("hospitals",hospitals);
-            i.putExtra("showtimes",showtimes);
-            i.putExtra("restaurants", restaurants);
-            i.putExtra("malls",malls);
-            i.putExtra("clubs",clubs);
-            i.putExtra("attractions",attractions);
-            i.putExtra("reviews",reviews);
->>>>>>> origin/master
+
             startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
