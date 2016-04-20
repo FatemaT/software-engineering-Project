@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_hospital_detail"
+    tools:context="com.cs442.faaltene.touristassist.Hospital_detail">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hname"
+        android:text="Hospital Name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/had"
+        android:text="Hospital Address"
+        android:layout_below="@+id/hname"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hinfo"
+        android:text="Hospital Info"
+        android:layout_below="@+id/had"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hSpectv"
+        android:text="Hospital Specializations"
+        android:layout_below="@+id/hinfo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hSpec"
+        android:text="Hospital Specializations"
+        android:layout_below="@+id/hSpectv"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hlistlay"
+        android:layout_below="@id/hSpec"
+        android:layout_marginTop="40dp">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="403dp"
+            android:id="@+id/hrev"></ListView>
+    </LinearLayout>
+
+</RelativeLayout>
