@@ -22,31 +22,35 @@
         </activity>
         <activity
             android:name=".MainNavigation"
-            android:label="@string/app_name"
+            android:label="Tourist Assisting Application"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Restaurant_detail"
-            android:label="@string/title_activity_restaurant_detail"
+            android:label="Restaurant Details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Hotel_detail"
+            android:label="Hotel Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Show_detail"
-            android:label="Show Detail"
+            android:label="Show Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Mall_detail"
-            android:label="@string/title_activity_mall_detail"
+            android:label="Mall Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Hospital_detail"
-            android:label="@string/title_activity_hospital_detail"
+            android:label="Hospital Details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Bar_detail"
-            android:label="@string/title_activity_bar_detail"
+            android:label="Bar Details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Museum_detail"
-            android:label="@string/title_activity_museum_detail"
+            android:label="Attraction Details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
