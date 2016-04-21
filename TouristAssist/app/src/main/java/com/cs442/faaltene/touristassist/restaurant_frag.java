@@ -95,8 +95,6 @@ public class restaurant_frag extends Fragment {
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
 
-
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

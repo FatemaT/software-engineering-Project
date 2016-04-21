@@ -62,7 +62,7 @@ public class Hotel_detail extends AppCompatActivity {
         String info=intent.getStringExtra("Hinfo");
         String coord=intent.getStringExtra("Hcoord");
         Hid = intent.getStringExtra("Hid");
-        Hid2 = Integer.parseInt(Hid);
+       // Hid2 = Integer.parseInt(Hid);
         rev = new ArrayList<Review>();
         Hname = (TextView) findViewById(R.id.hname);
         Hname.setTypeface(tf);
@@ -74,8 +74,8 @@ public class Hotel_detail extends AppCompatActivity {
         Hinfo.setTypeface(tf);
         Hinfo.setText(info);
         Hrev = (ListView)findViewById(R.id.hrev);
-
-
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
 
@@ -133,7 +133,8 @@ public class Hotel_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                Hrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                Hrev.setVisibility(View.VISIBLE);
+                revad  =new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -156,14 +157,17 @@ public class Hotel_detail extends AppCompatActivity {
                     }
 
 
-                });
-
+                };
+                Hrev.setAdapter(revad);
+                Hrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
             }else{
                 Hrev.setVisibility(View.GONE);
             }
         }
 
     }
+
     public static Review[] parseReviews(SoapObject soap)
     {
         Review[] reviews = new Review[soap.getPropertyCount()];
@@ -188,7 +192,11 @@ public class Hotel_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+<<<<<<< HEAD
             //Hid = Hid2+"";
+=======
+           // Hid = Hid2+"";
+>>>>>>> origin/master
             Request.addProperty("arg0" ,Hid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

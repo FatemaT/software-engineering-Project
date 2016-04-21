@@ -42,7 +42,7 @@ public class Show_detail extends AppCompatActivity {
     String Sid;
     TextView review;
     ArrayList<Review> rev;
-    ArrayAdapter<Review> revad;
+    ArrayAdapter<Review> svad;
     TextView Sdur;
     TextView Sshows;
 
@@ -68,7 +68,11 @@ public class Show_detail extends AppCompatActivity {
         String coord=intent.getStringExtra("Scoord");
         String shows=intent.getStringExtra("Sshows");
         Sid = intent.getStringExtra("Sid");
+<<<<<<< HEAD
         //Sid2 = Integer.parseInt(Sid);
+=======
+       // Sid2 = Integer.parseInt(Sid);
+>>>>>>> origin/master
         rev = new ArrayList<Review>();
         Sname = (TextView) findViewById(R.id.sname);
         Sname.setTypeface(tf);
@@ -85,7 +89,8 @@ public class Show_detail extends AppCompatActivity {
         Srev = (ListView)findViewById(R.id.srev);
         Sshows = (TextView) findViewById(R.id.sshows);
         Sshows.setText(shows);
-
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
 
@@ -122,6 +127,10 @@ public class Show_detail extends AppCompatActivity {
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
                 rev.add(reviews[i]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
             }
             //retrieveCity();
             return null;
@@ -142,7 +151,8 @@ public class Show_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                Srev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                Srev.setVisibility(View.VISIBLE);
+                svad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -165,8 +175,10 @@ public class Show_detail extends AppCompatActivity {
                     }
 
 
-                });
-
+                };
+                Srev.setAdapter(svad);
+                Srev.setAdapter(svad);
+                svad.notifyDataSetChanged();
             }else{
                 Srev.setVisibility(View.GONE);
             }
@@ -197,7 +209,11 @@ public class Show_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+<<<<<<< HEAD
             //Sid = Sid2+"";
+=======
+           // Sid = Sid2+"";
+>>>>>>> origin/master
             Request.addProperty("arg0" ,Sid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
