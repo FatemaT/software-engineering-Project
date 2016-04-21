@@ -17,29 +17,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rname"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Restaurant Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rad"
+        android:textSize="20dp"
         android:text="Restaurant Address"
-        android:layout_below="@+id/rname"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/rname"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rinfo"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Restaurant Info"
-        android:layout_below="@+id/rad"/>
+        android:layout_below="@+id/rad"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rCuitv"
+        android:textSize="20dp"
         android:text="Restaurant Cuisine"
-        android:layout_below="@+id/rinfo"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/rinfo"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rCui"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
         android:text="Restaurant Cuisine"
         android:layout_below="@+id/rCuitv"/>
     <LinearLayout
@@ -50,7 +63,8 @@
         android:layout_marginTop="40dp">
         <ListView
         android:layout_width="wrap_content"
-        android:layout_height="403dp"
+        android:layout_height="230dp"
+        android:divider="@color/colorPrimaryDark"
         android:id="@+id/rrev"></ListView>
     </LinearLayout>
 

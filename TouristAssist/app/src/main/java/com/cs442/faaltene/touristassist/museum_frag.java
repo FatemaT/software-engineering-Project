@@ -197,14 +197,14 @@ public class museum_frag extends Fragment {
             SoapObject pii = (SoapObject)soap.getProperty(i);
             Attraction attraction = new Attraction();
 
-            attraction.setAttractionId(pii.getProperty(0).toString());
-            attraction.setAttractionName(pii.getProperty(1).toString());
-            attraction.setAttractionAddress(pii.getProperty(2).toString());
-            attraction.setAttractionDetails(pii.getProperty(3).toString());
-            attraction.setCoordinates(pii.getProperty(4).toString());
-            attraction.setFee(pii.getProperty(5).toString());
-            attraction.setCity(pii.getProperty(6).toString());
-            attraction.setCityId(pii.getProperty(7).toString());
+            attraction.setAttractionAddress(pii.getProperty(0).toString());
+            attraction.setAttractionDetails(pii.getProperty(1).toString());
+            attraction.setAttractionId(pii.getProperty(2).toString());
+            attraction.setAttractionName(pii.getProperty(3).toString());
+            attraction.setCity(pii.getProperty(4).toString());
+            attraction.setCityId(pii.getProperty(5).toString());
+            attraction.setCoordinates(pii.getProperty(6).toString());
+            attraction.setFee(pii.getProperty(7).toString());
 
             attractions[i] = attraction;
 
@@ -259,7 +259,7 @@ public class museum_frag extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent i = new Intent(mContext, Museum_detail.class);
                     //i.putExtra("reviews",reviews);
-                    i.putExtra("attraction", attractions[position]);
+                    //i.putExtra("attraction", attractions[position]);
                     i.putExtra("Aname", attractions[position].getAttractionName());
                     i.putExtra("Ainfo", attractions[position].getAttractionDetails());
                     i.putExtra("Aad", attractions[position].getAttractionAddress());

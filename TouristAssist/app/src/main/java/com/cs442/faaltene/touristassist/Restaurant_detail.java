@@ -2,12 +2,14 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.test.RenamingDelegatingContext;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -39,10 +41,12 @@ public class Restaurant_detail extends AppCompatActivity {
     int rid2;
     Context mContext;
     String rid;
+
     TextView review;
     ArrayList<Review> rev;
     ArrayAdapter<Review> revad;
     TextView rcui;
+    TextView rcuitv;
 
 
     @Override
@@ -61,6 +65,7 @@ public class Restaurant_detail extends AppCompatActivity {
         String name = intent.getStringExtra("Rname");
         String add=intent.getStringExtra("Rad");
         String info=intent.getStringExtra("Rinfo");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         String cuisine=intent.getStringExtra("RCui");
         String coord=intent.getStringExtra("RCoord");
         rid = intent.getStringExtra("Rid");
@@ -68,12 +73,19 @@ public class Restaurant_detail extends AppCompatActivity {
         rev = new ArrayList<Review>();
         rname = (TextView) findViewById(R.id.rname);
         rname.setText(name);
+        rname.setTypeface(tf);
         rad = (TextView) findViewById(R.id.rad);
+        rad.setTypeface(tf);
         rad.setText(add);
         rinfo = (TextView) findViewById(R.id.rinfo);
+        rinfo.setTypeface(tf);
         rinfo.setText(info);
         rcui = (TextView) findViewById(R.id.rCui);
+        rcuitv = (TextView) findViewById(R.id.rCuitv);
+        rcui.setTypeface(tf);
+        rcuitv.setTypeface(tf);
         rcui.setText(cuisine);
+
         rrev = (ListView)findViewById(R.id.rrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
@@ -153,7 +165,6 @@ public class Restaurant_detail extends AppCompatActivity {
 
                         rating = (TextView) v.findViewById(R.id.rating);
                         review = (TextView) v.findViewById(R.id.review);
-
                         rating.setText(rev.get(position).getRating());
                         review.setText(rev.get(position).getReview());
 
