@@ -22,7 +22,6 @@ import org.ksoap2.transport.HttpTransportSE;
 import models.City;
 
 import models.Attraction;
-
 import models.Hospital;
 import models.Hotel;
 import models.Mall;

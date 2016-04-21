@@ -51,7 +51,7 @@ public class museum_frag extends Fragment {
     int cid;
     String cityname;
     Attraction[] attractions;
-    ArrayList<String> attr;
+    ArrayList<String> attra;
     Review[] reviews;
     String cityid;
     View rootView;
@@ -109,7 +109,7 @@ public class museum_frag extends Fragment {
         ((MainNavigation) getActivity()).setActionBarTitle("Museums");
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         rootView = inflater.inflate(R.layout.fragment_museum_frag, container, false);
-        attr = new ArrayList<String>();
+        attra = new ArrayList<String>();
         // attractions = (Attraction[]) getArguments().getSerializable("attractions");
         attraction = (ListView)rootView.findViewById(R.id.museum_list);
 
@@ -118,68 +118,6 @@ public class museum_frag extends Fragment {
         //attraction.setAdapter(attrac);
 
         return rootView;
-    }
-
-    private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            Log.i(TAG, "onPreExecute");
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            Log.i(TAG, "doInBackground");
-            //retrieveShowtimes();
-            //retrieveHotels();
-            retrieveAttractions();
-            for (int i = 0; i<attractions.length; i++){
-                attr.add(attractions[i].getAttractionName());
-            }
-            //retrieveMalls();
-            //retrieveHospitals();
-            //retrieveClubs();
-            //retrieveAttractions();
-            //retrieveReviews();
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            Log.i(TAG, "onPostExecute");
-            //i.putExtra("city", city);
-            //i.putExtra("hotels", hotels);
-            //i.putExtra("hospitals",hospitals);
-            //i.putExtra("showtimes",showtimes);
-            //i.putExtra("restaurants", restaurants);
-            //i.putExtra("malls",malls);
-            //i.putExtra("clubs",clubs);
-            //i.putExtra("reviews",reviews);
-            //startActivity(i);
-            // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
-            attrac = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, attr);
-            attraction.setAdapter(attrac);
-            mContext = getActivity().getApplicationContext();
-            attraction.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent i = new Intent(mContext, Restaurant_detail.class);
-                    //i.putExtra("reviews",reviews);
-                    i.putExtra("attraction", attractions[position]);
-                    i.putExtra("Aname", attractions[position].getAttractionName());
-                    i.putExtra("Ainfo", attractions[position].getAttractionDetails());
-                    i.putExtra("Aad", attractions[position].getAttractionAddress());
-                    i.putExtra("AFee", attractions[position].getFee());
-                    i.putExtra("ACoord", attractions[position].getCoordinates());
-                    i.putExtra("Aid", attractions[position].getAttractionId());
-                    startActivity(i);
-
-                }
-            });
-        }
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -253,6 +191,7 @@ public class museum_frag extends Fragment {
 
     public static Attraction[] parseAttractions(SoapObject soap)
     {
+        Log.i("parseattrac",soap.getPropertyCount()+"");
         Attraction[] attractions = new Attraction[soap.getPropertyCount()];
         for (int i = 0; i < attractions.length; i++) {
             SoapObject pii = (SoapObject)soap.getProperty(i);
@@ -272,4 +211,70 @@ public class museum_frag extends Fragment {
         }
         return attractions;
     }
+
+    private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            Log.i(TAG, "onPreExecute");
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.i(TAG, "doInBackground");
+            //retrieveShowtimes();
+            //retrieveHotels();
+            retrieveAttractions();
+            for (int i = 0; i<attractions.length; i++){
+                attra.add(attractions[i].getAttractionName());
+            }
+            //retrieveMalls();
+            //retrieveHospitals();
+            //retrieveClubs();
+            //retrieveAttractions();
+            //retrieveReviews();
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            Log.i(TAG, "onPostExecute");
+            //i.putExtra("city", city);
+            //i.putExtra("hotels", hotels);
+            //i.putExtra("hospitals",hospitals);
+            //i.putExtra("showtimes",showtimes);
+            //i.putExtra("restaurants", restaurants);
+            //i.putExtra("malls",malls);
+            //i.putExtra("clubs",clubs);
+            //i.putExtra("reviews",reviews);
+            //startActivity(i);
+            // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
+            attrac = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, attra);
+            attraction.setAdapter(attrac);
+            mContext = getActivity().getApplicationContext();
+            attraction.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent i = new Intent(mContext, Museum_detail.class);
+                    //i.putExtra("reviews",reviews);
+                    i.putExtra("attraction", attractions[position]);
+                    i.putExtra("Aname", attractions[position].getAttractionName());
+                    i.putExtra("Ainfo", attractions[position].getAttractionDetails());
+                    i.putExtra("Aad", attractions[position].getAttractionAddress());
+                    i.putExtra("AFee", attractions[position].getFee());
+                    i.putExtra("ACoord", attractions[position].getCoordinates());
+                    i.putExtra("Aid", attractions[position].getAttractionId());
+                    startActivity(i);
+
+                }
+            });
+        }
+
+    }
+
+
+
+
 }

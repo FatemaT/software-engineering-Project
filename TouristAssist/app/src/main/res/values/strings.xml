@@ -12,4 +12,5 @@
     <string name="title_activity_mall_detail">Mall_detail</string>
     <string name="title_activity_hospital_detail">Hospital_detail</string>
     <string name="title_activity_bar_detail">Bar_detail</string>
+    <string name="title_activity_museum_detail">Museum_detail</string>
 </resources>
