@@ -194,7 +194,7 @@ public class Museum_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            aid = aid2+"";
+            //aid = aid2+"";
             Request.addProperty("arg0" ,aid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

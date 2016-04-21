@@ -195,7 +195,7 @@ public class Restaurant_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            rid = rid2+"";
+            //rid = rid2+"";
             Request.addProperty("arg0" ,rid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
