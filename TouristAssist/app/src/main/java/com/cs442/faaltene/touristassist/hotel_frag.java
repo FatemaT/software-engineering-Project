@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,9 +99,9 @@ public class hotel_frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainNavigation) getActivity()).setActionBarTitle("Hotels");
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         rootView = inflater.inflate(R.layout.fragment_hotel_frag, container, false);
         hot = new ArrayList<String>();
-        hotels = (Hotel[]) getArguments().getSerializable("hotels");
         hotel = (ListView)rootView.findViewById(R.id.hotel_list);
 
         return rootView;
@@ -234,7 +235,7 @@ public class hotel_frag extends Fragment {
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
             cityid = cityid +"";
-            Request.addProperty("arg1" ,cityid);
+            Request.addProperty("arg0" ,cityid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);
