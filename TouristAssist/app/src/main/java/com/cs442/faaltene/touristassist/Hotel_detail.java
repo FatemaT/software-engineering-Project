@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,12 +51,12 @@ public class Hotel_detail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
         Hname = (TextView)findViewById(R.id.hname);
         Had = (TextView)findViewById(R.id.had);
         Hinfo = (TextView)findViewById(R.id.hinfo);
-
         String name = intent.getStringExtra("Hname");
         String add=intent.getStringExtra("Had");
         String info=intent.getStringExtra("Hinfo");
@@ -64,10 +65,13 @@ public class Hotel_detail extends AppCompatActivity {
         Hid2 = Integer.parseInt(Hid);
         rev = new ArrayList<Review>();
         Hname = (TextView) findViewById(R.id.hname);
+        Hname.setTypeface(tf);
         Hname.setText(name);
         Had = (TextView) findViewById(R.id.had);
+        Had.setTypeface(tf);
         Had.setText(add);
         Hinfo = (TextView) findViewById(R.id.hinfo);
+        Hinfo.setTypeface(tf);
         Hinfo.setText(info);
         Hrev = (ListView)findViewById(R.id.hrev);
 
@@ -107,9 +111,8 @@ public class Hotel_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(Hid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -185,7 +188,7 @@ public class Hotel_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Hid = Hid2+"";
+            //Hid = Hid2+"";
             Request.addProperty("arg0" ,Hid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

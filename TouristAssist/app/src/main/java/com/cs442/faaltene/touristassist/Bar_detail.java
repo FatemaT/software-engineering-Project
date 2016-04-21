@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,6 +55,7 @@ public class Bar_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         Intent intent = getIntent();
         reviews = (Review[])intent.getSerializableExtra("reviews");
         bname = (TextView)findViewById(R.id.bname);
@@ -66,15 +68,19 @@ public class Bar_detail extends AppCompatActivity {
         String disco=intent.getStringExtra("CDisco");
         String coord=intent.getStringExtra("CCoord");
         bid = intent.getStringExtra("Cid");
-        bid2 = Integer.parseInt(bid);
+        //bid2 = Integer.parseInt(bid);
         rev = new ArrayList<Review>();
         bname = (TextView) findViewById(R.id.bname);
+        bname.setTypeface(tf);
         bname.setText(name);
         bad = (TextView) findViewById(R.id.bad);
+        bad.setTypeface(tf);
         bad.setText(add);
         binfo = (TextView) findViewById(R.id.binfo);
+        binfo.setTypeface(tf);
         binfo.setText(info);
         bDisco = (TextView) findViewById(R.id.bDisco);
+        bDisco.setTypeface(tf);
         bDisco.setText("Disco?: " + disco);
         brev = (ListView)findViewById(R.id.brev);
         AsyncCallWS task = new AsyncCallWS();

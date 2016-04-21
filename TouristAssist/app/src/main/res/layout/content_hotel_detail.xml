@@ -16,18 +16,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/hname"
         android:text="Hotel Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/had"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hotel Address"
         android:layout_below="@+id/hname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hinfo"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hotel Info"
         android:layout_below="@+id/had"/>
 

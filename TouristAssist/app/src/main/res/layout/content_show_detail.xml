@@ -17,29 +17,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sname"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Show Time Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sad"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Show Time Address"
         android:layout_below="@+id/sname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sinfo"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Show Time Info"
         android:layout_below="@+id/sad"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sdur"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Show Time Duration"
         android:layout_below="@+id/sinfo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sshows"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Show Time Shows"
         android:layout_below="@+id/sdur"/>
 

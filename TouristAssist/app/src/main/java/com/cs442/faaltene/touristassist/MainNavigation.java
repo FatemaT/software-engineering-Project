@@ -145,9 +145,11 @@ public class MainNavigation extends AppCompatActivity
         } else if (id == R.id.nav_shows) {//handle show fragment
             fragmentClass = show_frag.class;
             b.putSerializable("city",citym);
-        } else if (id == R.id.nav_share) {//handle restaurant fragment
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_home) {//handle restaurant fragment
+            Intent in = new Intent(MainNavigation.this, MainScreen.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(in);
+        } else if (id == R.id.nav_exit) {
 
         }
         try {
@@ -157,10 +159,12 @@ public class MainNavigation extends AppCompatActivity
             e.printStackTrace();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        if(fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
         return true;
     }
     public void setActionBarTitle(String title) {

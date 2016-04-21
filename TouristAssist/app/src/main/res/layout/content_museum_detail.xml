@@ -15,23 +15,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aname"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Attraction Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aad"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Attraction Address"
         android:layout_below="@+id/aname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ainfo"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Attraction Info"
         android:layout_below="@+id/aad"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aFeetv"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
         android:text="Attraction Fee"
         android:layout_below="@+id/ainfo"/>
     <TextView

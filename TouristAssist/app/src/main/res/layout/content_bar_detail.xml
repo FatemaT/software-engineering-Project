@@ -14,29 +14,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bname"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Bar Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bad"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Bar Address"
         android:layout_below="@+id/bname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/binfo"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Bar Info"
         android:layout_below="@+id/bad"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bDiscotv"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Bar Disco"
         android:layout_below="@+id/binfo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bDisco"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
         android:text="Bar Disco"
         android:layout_below="@+id/bDiscotv"/>
     <LinearLayout

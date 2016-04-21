@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,8 @@ public class Show_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
         Sname = (TextView)findViewById(R.id.sname);
         Sad = (TextView)findViewById(R.id.sad);
         Sinfo = (TextView)findViewById(R.id.sinfo);
@@ -66,15 +68,19 @@ public class Show_detail extends AppCompatActivity {
         String coord=intent.getStringExtra("Scoord");
         String shows=intent.getStringExtra("Sshows");
         Sid = intent.getStringExtra("Sid");
-        Sid2 = Integer.parseInt(Sid);
+        //Sid2 = Integer.parseInt(Sid);
         rev = new ArrayList<Review>();
         Sname = (TextView) findViewById(R.id.sname);
+        Sname.setTypeface(tf);
         Sname.setText(name);
         Sad = (TextView) findViewById(R.id.sad);
+        Sad.setTypeface(tf);
         Sad.setText(add);
         Sinfo = (TextView) findViewById(R.id.sinfo);
+        Sinfo.setTypeface(tf);
         Sinfo.setText(info);
         Sdur = (TextView) findViewById(R.id.sdur);
+        Sdur.setTypeface(tf);
         Sdur.setText(dur);
         Srev = (ListView)findViewById(R.id.srev);
         Sshows = (TextView) findViewById(R.id.sshows);
@@ -115,9 +121,7 @@ public class Show_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(Sid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
             }
             //retrieveCity();
             return null;
@@ -193,7 +197,7 @@ public class Show_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Sid = Sid2+"";
+            //Sid = Sid2+"";
             Request.addProperty("arg0" ,Sid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

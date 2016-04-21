@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -51,14 +52,18 @@ public class Museum_detail extends AppCompatActivity {
         setContentView(R.layout.activity_museum_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         //reviews = (Review[])intent.getSerializableExtra("reviews");
         aname = (TextView)findViewById(R.id.aname);
+        aname.setTypeface(tf);
         aad = (TextView)findViewById(R.id.aad);
+        aad.setTypeface(tf);
         ainfo = (TextView)findViewById(R.id.ainfo);
+        ainfo.setTypeface(tf);
         afee = (TextView)findViewById(R.id.aFee);
+        afee.setTypeface(tf);
         String name = intent.getStringExtra("Aname");
         String add=intent.getStringExtra("Aad");
         String info=intent.getStringExtra("Ainfo");

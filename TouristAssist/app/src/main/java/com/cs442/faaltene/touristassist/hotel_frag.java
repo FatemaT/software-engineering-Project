@@ -234,7 +234,7 @@ public class hotel_frag extends Fragment {
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
             cityid = cityid +"";
-            Request.addProperty("arg1" ,cityid);
+            Request.addProperty("arg0" ,cityid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);

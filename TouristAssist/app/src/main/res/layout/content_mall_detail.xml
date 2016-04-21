@@ -17,42 +17,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mname"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Mall Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mad"
         android:text="Mall Address"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_below="@+id/mname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/minfo"
         android:text="Mall Info"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_below="@+id/mad"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mBtv"
         android:text="Mall Brands"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_below="@+id/minfo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mB"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
         android:text="Mall Stores"
         android:layout_below="@+id/mBtv"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mStv"
-        android:text="Mall Brands"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Mall Stores"
         android:layout_below="@+id/mB"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mS"
-        android:text="Mall Brands"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Mall Strores"
         android:layout_below="@+id/mStv"/>
 
 

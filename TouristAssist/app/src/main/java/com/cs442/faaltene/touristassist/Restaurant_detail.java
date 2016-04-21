@@ -57,7 +57,7 @@ public class Restaurant_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
         rname = (TextView)findViewById(R.id.rname);
         rad = (TextView)findViewById(R.id.rad);
         rinfo = (TextView)findViewById(R.id.rinfo);
