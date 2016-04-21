@@ -40,6 +40,8 @@ public class MainNavigation extends AppCompatActivity
         mall_frag.OnFragmentInteractionListener, museum_frag.OnFragmentInteractionListener,
         show_frag.OnFragmentInteractionListener{
         TextView city;
+    NavigationView navigationView=null;
+    Toolbar toolbar = null;
     /*Hotel[] hotels;
     Showtime[] showtimes;
     Restaurant[] restaurants;
@@ -53,7 +55,7 @@ public class MainNavigation extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent i= getIntent();
         city = (TextView) findViewById(R.id.citytv);
@@ -67,16 +69,16 @@ public class MainNavigation extends AppCompatActivity
         clubs=(Club[]) i.getSerializableExtra("clubs");
         attractions = (Attraction[]) i.getSerializableExtra("attractions");
         reviews = (Review[]) i.getSerializableExtra("reviews");*/
-        Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
-        city.setTypeface(tf);
-        city.setText("City of " + citys);
+        //Typeface tf = Typeface.createFromAsset(getAssets(), "future.ttf");
+        //city.setTypeface(tf);
+        //city.setText("City of " + citys);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 

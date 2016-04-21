@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -117,7 +118,13 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            i.putExtra("city", city);
+            if (city != null) {
+                i.putExtra("city", city);
+                startActivity(i);
+            }else {
+                Toast.makeText(MainScreen.this, "Please enter a correct city name", Toast.LENGTH_SHORT).show();
+            }
+
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
             //i.putExtra("showtimes",showtimes);
@@ -125,7 +132,7 @@ public class MainScreen extends AppCompatActivity {
             //i.putExtra("malls",malls);
             //i.putExtra("clubs",clubs);
             //i.putExtra("reviews",reviews);
-            startActivity(i);
+
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
         }
 
