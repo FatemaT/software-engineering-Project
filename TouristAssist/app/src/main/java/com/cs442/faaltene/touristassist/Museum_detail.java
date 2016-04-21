@@ -54,7 +54,7 @@ public class Museum_detail extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
         aname = (TextView)findViewById(R.id.aname);
         aad = (TextView)findViewById(R.id.aad);
         ainfo = (TextView)findViewById(R.id.ainfo);
@@ -110,10 +110,9 @@ public class Museum_detail extends AppCompatActivity {
             //retrieveClubs();
             //retrieveAttractions();
             retrieveReviews();
-            for(int i = 0; i<reviews.length; i++){
-
+            for (int i = 0; i < reviews.length; i++) {
                     rev.add(reviews[i]);
-                }
+            }
 
             //retrieveCity();
             return null;
