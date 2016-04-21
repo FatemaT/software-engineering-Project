@@ -68,11 +68,7 @@ public class Show_detail extends AppCompatActivity {
         String coord=intent.getStringExtra("Scoord");
         String shows=intent.getStringExtra("Sshows");
         Sid = intent.getStringExtra("Sid");
-<<<<<<< HEAD
-        //Sid2 = Integer.parseInt(Sid);
-=======
-       // Sid2 = Integer.parseInt(Sid);
->>>>>>> origin/master
+
         rev = new ArrayList<Review>();
         Sname = (TextView) findViewById(R.id.sname);
         Sname.setTypeface(tf);
@@ -127,10 +123,6 @@ public class Show_detail extends AppCompatActivity {
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
                 rev.add(reviews[i]);
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
             }
             //retrieveCity();
             return null;
@@ -209,11 +201,6 @@ public class Show_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-<<<<<<< HEAD
-            //Sid = Sid2+"";
-=======
-           // Sid = Sid2+"";
->>>>>>> origin/master
             Request.addProperty("arg0" ,Sid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

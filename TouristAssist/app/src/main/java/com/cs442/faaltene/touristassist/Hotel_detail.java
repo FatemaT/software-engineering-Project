@@ -192,11 +192,7 @@ public class Hotel_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-<<<<<<< HEAD
-            //Hid = Hid2+"";
-=======
-           // Hid = Hid2+"";
->>>>>>> origin/master
+
             Request.addProperty("arg0" ,Hid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
