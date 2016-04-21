@@ -44,6 +44,7 @@ public class hotel_frag extends Fragment {
     String cityid;
     Context mContext;
     City city;
+
     int cid;
     String cityname;
     String TAG = "Response";
@@ -117,7 +118,9 @@ public class hotel_frag extends Fragment {
         protected Void doInBackground(Void... params) {
             Log.i(TAG, "doInBackground");
             //retrieveShowtimes();
+
             //retrieveHotels();
+            //
             retrieveHotels();
             for (int i = 0; i<hotels.length; i++){
                 hot.add(hotels[i].getHotelName());

@@ -150,6 +150,11 @@ public class MainNavigation extends AppCompatActivity
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(in);
         } else if (id == R.id.nav_exit) {
+            this.finish();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
         }
         try {
