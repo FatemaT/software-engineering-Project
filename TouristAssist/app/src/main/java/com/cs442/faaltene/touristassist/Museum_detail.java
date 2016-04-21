@@ -63,7 +63,7 @@ public class Museum_detail extends AppCompatActivity {
         String add=intent.getStringExtra("Aad");
         String info=intent.getStringExtra("Ainfo");
         String fee=intent.getStringExtra("AFee");
-        afee2 = Integer.parseInt(fee);
+        //afee2 = Integer.parseInt(fee);
         String coord=intent.getStringExtra("ACoord");
         aid = intent.getStringExtra("Aid");
         //aid2 = Integer.parseInt(aid);
@@ -75,7 +75,7 @@ public class Museum_detail extends AppCompatActivity {
         ainfo = (TextView) findViewById(R.id.ainfo);
         ainfo.setText(info);
         afee = (TextView) findViewById(R.id.aFee);
-        afee.setText(afee2+"$");
+        afee.setText(fee);
         arev = (ListView)findViewById(R.id.arev);
         //hrev = (ListView)findViewById(R.id.hrev);
         AsyncCallWS task = new AsyncCallWS();
