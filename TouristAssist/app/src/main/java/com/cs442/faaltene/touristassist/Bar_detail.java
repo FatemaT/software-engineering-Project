@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,6 +55,7 @@ public class Bar_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         Intent intent = getIntent();
         reviews = (Review[])intent.getSerializableExtra("reviews");
         bname = (TextView)findViewById(R.id.bname);
@@ -66,15 +68,19 @@ public class Bar_detail extends AppCompatActivity {
         String disco=intent.getStringExtra("CDisco");
         String coord=intent.getStringExtra("CCoord");
         bid = intent.getStringExtra("Cid");
-        bid2 = Integer.parseInt(bid);
+        //bid2 = Integer.parseInt(bid);
         rev = new ArrayList<Review>();
         bname = (TextView) findViewById(R.id.bname);
+        bname.setTypeface(tf);
         bname.setText(name);
         bad = (TextView) findViewById(R.id.bad);
+        bad.setTypeface(tf);
         bad.setText(add);
         binfo = (TextView) findViewById(R.id.binfo);
+        binfo.setTypeface(tf);
         binfo.setText(info);
         bDisco = (TextView) findViewById(R.id.bDisco);
+        bDisco.setTypeface(tf);
         bDisco.setText("Disco?: " + disco);
         brev = (ListView)findViewById(R.id.brev);
         AsyncCallWS task = new AsyncCallWS();
@@ -96,6 +102,7 @@ public class Bar_detail extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             Log.i(TAG, "onPreExecute");
+            brev = (ListView)findViewById(R.id.brev);
         }
 
         @Override
@@ -110,9 +117,7 @@ public class Bar_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(bid)){
                     rev.add(reviews[i]);
-                }
             }
             //retrieveCity();
             return null;
@@ -121,6 +126,7 @@ public class Bar_detail extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
+
             //i.putExtra("city", city);
             //i.putExtra("hotels", hotels);
             //i.putExtra("hospitals",hospitals);
@@ -132,12 +138,16 @@ public class Bar_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
-            //if (!rev.isEmpty()){
-                brev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+            Log.i("Enters","1");
+            if (!rev.isEmpty()){
+                Log.i("Enters","2");
+                brev.setVisibility(View.VISIBLE);
+                bevad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Bar_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Bar_detail.this
@@ -156,11 +166,12 @@ public class Bar_detail extends AppCompatActivity {
                     }
 
 
-                });
-
-            /*}else{
+                };
+                brev.setAdapter(bevad);
+                bevad.notifyDataSetChanged();
+            }else{
                 brev.setVisibility(View.GONE);
-            }*/
+            }
         }
 
     }

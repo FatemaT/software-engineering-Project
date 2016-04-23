@@ -25,62 +25,63 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 
-import models.Hospital;
-import models.Restaurant;
+import models.Attraction;
 import models.Review;
 
-public class Hospital_detail extends AppCompatActivity {
-
-    Hospital[] hospital;
+public class Museum_detail extends AppCompatActivity {
+    Attraction[] attraction;
     String TAG = "Response";
     Review[] reviews;
-    TextView hname;
-    TextView had;
-    TextView hinfo;
-    ListView hrev;
+    TextView aname;
+    TextView aad;
+    TextView ainfo;
+    ListView arev;
     TextView rating;
-    int hid2;
+    int aid2;
+    int afee2;
     Context mContext;
-    String hid;
+    String aid;
     TextView review;
     ArrayList<Review> rev;
     ArrayAdapter<Review> revad;
-    TextView hspec;
+    TextView afee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital_detail);
+        setContentView(R.layout.activity_museum_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         //reviews = (Review[])intent.getSerializableExtra("reviews");
-        hname = (TextView)findViewById(R.id.hname);
-        hname.setTypeface(tf);
-        had = (TextView)findViewById(R.id.had);
-        had.setTypeface(tf);
-        hinfo = (TextView)findViewById(R.id.hinfo);
-        hinfo.setTypeface(tf);
-        hspec = (TextView)findViewById(R.id.hSpec);
-        hspec.setTypeface(tf);
-        String name = intent.getStringExtra("Hname");
-        String add=intent.getStringExtra("Had");
-        String info=intent.getStringExtra("Hinfo");
-        String specializations=intent.getStringExtra("HSpec");
-        String coord=intent.getStringExtra("HCoord");
-        hid = intent.getStringExtra("Hid");
-        //hid2 = Integer.parseInt(hid);
+        aname = (TextView)findViewById(R.id.aname);
+        aname.setTypeface(tf);
+        aad = (TextView)findViewById(R.id.aad);
+        aad.setTypeface(tf);
+        ainfo = (TextView)findViewById(R.id.ainfo);
+        ainfo.setTypeface(tf);
+        afee = (TextView)findViewById(R.id.aFee);
+        afee.setTypeface(tf);
+        String name = intent.getStringExtra("Aname");
+        String add=intent.getStringExtra("Aad");
+        String info=intent.getStringExtra("Ainfo");
+        String fee=intent.getStringExtra("AFee");
+        //afee2 = Integer.parseInt(fee);
+        String coord=intent.getStringExtra("ACoord");
+        aid = intent.getStringExtra("Aid");
+        //aid2 = Integer.parseInt(aid);
         rev = new ArrayList<Review>();
-        hname = (TextView) findViewById(R.id.hname);
-        hname.setText(name);
-        had = (TextView) findViewById(R.id.had);
-        had.setText(add);
-        hinfo = (TextView) findViewById(R.id.hinfo);
-        hinfo.setText(info);
-        hspec = (TextView) findViewById(R.id.hSpec);
-        hspec.setText(specializations);
+        aname = (TextView) findViewById(R.id.aname);
+        aname.setText(name);
+        aad = (TextView) findViewById(R.id.aad);
+        aad.setText(add);
+        ainfo = (TextView) findViewById(R.id.ainfo);
+        ainfo.setText(info);
+        afee = (TextView) findViewById(R.id.aFee);
+        afee.setText(fee);
+        arev = (ListView)findViewById(R.id.arev);
         //hrev = (ListView)findViewById(R.id.hrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
@@ -101,7 +102,6 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             Log.i(TAG, "onPreExecute");
-            hrev = (ListView)findViewById(R.id.hrev);
         }
 
         @Override
@@ -115,9 +115,10 @@ public class Hospital_detail extends AppCompatActivity {
             //retrieveClubs();
             //retrieveAttractions();
             retrieveReviews();
-            for(int i = 0; i<reviews.length; i++){
-                rev.add(reviews[i]);
+            for (int i = 0; i < reviews.length; i++) {
+                    rev.add(reviews[i]);
             }
+
             //retrieveCity();
             return null;
         }
@@ -140,7 +141,7 @@ public class Hospital_detail extends AppCompatActivity {
             Log.i("Enters","1");
             if (!rev.isEmpty()){
                 Log.i("Enters","2");
-                hrev.setVisibility(View.VISIBLE);
+                arev.setVisibility(View.VISIBLE);
                 revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
@@ -148,8 +149,8 @@ public class Hospital_detail extends AppCompatActivity {
                         View v = null;
 
                         if (v == null) {
-                            if (Hospital_detail.this != null) {
-                                LayoutInflater vi = (LayoutInflater) Hospital_detail.this
+                            if (Museum_detail.this != null) {
+                                LayoutInflater vi = (LayoutInflater) Museum_detail.this
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 v = vi.inflate(R.layout.list_item, null);
                             }
@@ -166,10 +167,11 @@ public class Hospital_detail extends AppCompatActivity {
 
 
                 };
-                hrev.setAdapter(revad);
+                arev.setAdapter(revad);
+                arev.setAdapter(revad);
                 revad.notifyDataSetChanged();
             }else{
-                hrev.setVisibility(View.GONE);
+                arev.setVisibility(View.GONE);
             }
         }
 
@@ -198,8 +200,8 @@ public class Hospital_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
- //           hid = hid2+"";
-            Request.addProperty("arg0" ,hid);
+            //aid = aid2+"";
+            Request.addProperty("arg0" ,aid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);

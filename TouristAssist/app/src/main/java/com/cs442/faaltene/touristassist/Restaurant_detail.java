@@ -2,12 +2,14 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.test.RenamingDelegatingContext;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -39,10 +41,12 @@ public class Restaurant_detail extends AppCompatActivity {
     int rid2;
     Context mContext;
     String rid;
+
     TextView review;
     ArrayList<Review> rev;
     ArrayAdapter<Review> revad;
     TextView rcui;
+    TextView rcuitv;
 
 
     @Override
@@ -53,7 +57,7 @@ public class Restaurant_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
         rname = (TextView)findViewById(R.id.rname);
         rad = (TextView)findViewById(R.id.rad);
         rinfo = (TextView)findViewById(R.id.rinfo);
@@ -61,19 +65,27 @@ public class Restaurant_detail extends AppCompatActivity {
         String name = intent.getStringExtra("Rname");
         String add=intent.getStringExtra("Rad");
         String info=intent.getStringExtra("Rinfo");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         String cuisine=intent.getStringExtra("RCui");
         String coord=intent.getStringExtra("RCoord");
         rid = intent.getStringExtra("Rid");
-        rid2 = Integer.parseInt(rid);
+        //rid2 = Integer.parseInt(rid);
         rev = new ArrayList<Review>();
         rname = (TextView) findViewById(R.id.rname);
         rname.setText(name);
+        rname.setTypeface(tf);
         rad = (TextView) findViewById(R.id.rad);
+        rad.setTypeface(tf);
         rad.setText(add);
         rinfo = (TextView) findViewById(R.id.rinfo);
+        rinfo.setTypeface(tf);
         rinfo.setText(info);
         rcui = (TextView) findViewById(R.id.rCui);
+        rcuitv = (TextView) findViewById(R.id.rCuitv);
+        rcui.setTypeface(tf);
+        rcuitv.setTypeface(tf);
         rcui.setText(cuisine);
+
         rrev = (ListView)findViewById(R.id.rrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
@@ -113,9 +125,8 @@ public class Restaurant_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(rid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -135,12 +146,15 @@ public class Restaurant_detail extends AppCompatActivity {
             //startActivity(i);
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
+
             if (!rev.isEmpty()){
-                rrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                rrev.setVisibility(View.VISIBLE);
+                revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Restaurant_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Restaurant_detail.this
@@ -151,7 +165,6 @@ public class Restaurant_detail extends AppCompatActivity {
 
                         rating = (TextView) v.findViewById(R.id.rating);
                         review = (TextView) v.findViewById(R.id.review);
-
                         rating.setText(rev.get(position).getRating());
                         review.setText(rev.get(position).getReview());
 
@@ -159,8 +172,10 @@ public class Restaurant_detail extends AppCompatActivity {
                     }
 
 
-                });
-
+                };
+                rrev.setAdapter(revad);
+                rrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
             }else{
                 rrev.setVisibility(View.GONE);
             }
@@ -191,7 +206,7 @@ public class Restaurant_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            rid = rid2+"";
+            //rid = rid2+"";
             Request.addProperty("arg0" ,rid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

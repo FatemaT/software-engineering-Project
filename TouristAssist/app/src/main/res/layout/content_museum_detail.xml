@@ -2,63 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_bar_detail"
-    tools:context="com.cs442.faaltene.touristassist.Bar_detail">
+    tools:showIn="@layout/activity_museum_detail"
+    tools:context="com.cs442.faaltene.touristassist.Museum_detail">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bname"
+        android:id="@+id/aname"
         android:textSize="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Bar Name"/>
+        android:text="Attraction Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bad"
+        android:id="@+id/aad"
         android:textSize="15dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Bar Address"
-        android:layout_below="@+id/bname"/>
+        android:text="Attraction Address"
+        android:layout_below="@+id/aname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/binfo"
+        android:id="@+id/ainfo"
         android:textSize="15dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Bar Info"
-        android:layout_below="@+id/bad"/>
+        android:text="Attraction Info"
+        android:layout_below="@+id/aad"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bDiscotv"
-        android:textSize="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Bar Disco"
-        android:layout_below="@+id/binfo"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bDisco"
+        android:id="@+id/aFeetv"
         android:textSize="15dp"
         android:textColor="@color/colorPrimary"
-        android:text="Bar Disco"
-        android:layout_below="@+id/bDiscotv"/>
+        android:text="Attraction Fee"
+        android:layout_below="@+id/ainfo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aFee"
+        android:text="Attraction Fee"
+        android:layout_below="@+id/aFeetv"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/blistlay"
-        android:layout_below="@id/bDisco"
+        android:id="@+id/alistlay"
+        android:layout_below="@id/aFee"
         android:layout_marginTop="40dp">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="403dp"
-            android:id="@+id/brev"></ListView>
+            android:id="@+id/arev"></ListView>
     </LinearLayout>
 
 </RelativeLayout>

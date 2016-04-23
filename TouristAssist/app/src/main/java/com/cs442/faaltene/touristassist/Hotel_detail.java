@@ -23,68 +23,57 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 
-import models.Mall;
-import models.Restaurant;
+import models.Hotel;
 import models.Review;
 import models.Showtime;
 
-public class Show_detail extends AppCompatActivity {
-    Showtime[] showtimes;
+public class Hotel_detail extends AppCompatActivity {
+    Hotel[] hotel;
     String TAG = "Response";
     Review[] reviews;
-    TextView Sname;
-    TextView Sad;
-    TextView Sinfo;
-    ListView Srev;
+    TextView Hname;
+    TextView Had;
+    TextView Hinfo;
+    ListView Hrev;
     TextView rating;
-    int Sid2;
+    int Hid2;
     Context mContext;
-    String Sid;
+    String Hid;
     TextView review;
     ArrayList<Review> rev;
-    ArrayAdapter<Review> svad;
-    TextView Sdur;
-    TextView Sshows;
+    ArrayAdapter<Review> revad;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_detail);
+        setContentView(R.layout.activity_hotel_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent intent = getIntent();
         Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
+        Intent intent = getIntent();
         //reviews = (Review[])intent.getSerializableExtra("reviews");
-        Sname = (TextView)findViewById(R.id.sname);
-        Sad = (TextView)findViewById(R.id.sad);
-        Sinfo = (TextView)findViewById(R.id.sinfo);
-        Sdur = (TextView)findViewById(R.id.sdur);
-        String name = intent.getStringExtra("Sname");
-        String add=intent.getStringExtra("Sad");
-        String info=intent.getStringExtra("Sinfo");
-        String dur=intent.getStringExtra("Sdur");
-        String coord=intent.getStringExtra("Scoord");
-        String shows=intent.getStringExtra("Sshows");
-        Sid = intent.getStringExtra("Sid");
-
+        Hname = (TextView)findViewById(R.id.hname);
+        Had = (TextView)findViewById(R.id.had);
+        Hinfo = (TextView)findViewById(R.id.hinfo);
+        String name = intent.getStringExtra("Hname");
+        String add=intent.getStringExtra("Had");
+        String info=intent.getStringExtra("Hinfo");
+        String coord=intent.getStringExtra("Hcoord");
+        Hid = intent.getStringExtra("Hid");
+       // Hid2 = Integer.parseInt(Hid);
         rev = new ArrayList<Review>();
-        Sname = (TextView) findViewById(R.id.sname);
-        Sname.setTypeface(tf);
-        Sname.setText(name);
-        Sad = (TextView) findViewById(R.id.sad);
-        Sad.setTypeface(tf);
-        Sad.setText(add);
-        Sinfo = (TextView) findViewById(R.id.sinfo);
-        Sinfo.setTypeface(tf);
-        Sinfo.setText(info);
-        Sdur = (TextView) findViewById(R.id.sdur);
-        Sdur.setTypeface(tf);
-        Sdur.setText(dur);
-        Srev = (ListView)findViewById(R.id.srev);
-        Sshows = (TextView) findViewById(R.id.sshows);
-        Sshows.setText(shows);
+        Hname = (TextView) findViewById(R.id.hname);
+        Hname.setTypeface(tf);
+        Hname.setText(name);
+        Had = (TextView) findViewById(R.id.had);
+        Had.setTypeface(tf);
+        Had.setText(add);
+        Hinfo = (TextView) findViewById(R.id.hinfo);
+        Hinfo.setTypeface(tf);
+        Hinfo.setText(info);
+        Hrev = (ListView)findViewById(R.id.hrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
 
@@ -123,6 +112,7 @@ public class Show_detail extends AppCompatActivity {
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
                 rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -143,15 +133,15 @@ public class Show_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                Srev.setVisibility(View.VISIBLE);
-                svad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                Hrev.setVisibility(View.VISIBLE);
+                revad  =new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
                         if (v == null) {
-                            if (Show_detail.this != null) {
-                                LayoutInflater vi = (LayoutInflater) Show_detail.this
+                            if (Hotel_detail.this != null) {
+                                LayoutInflater vi = (LayoutInflater) Hotel_detail.this
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 v = vi.inflate(R.layout.list_item, null);
                             }
@@ -168,15 +158,16 @@ public class Show_detail extends AppCompatActivity {
 
 
                 };
-                Srev.setAdapter(svad);
-                Srev.setAdapter(svad);
-                svad.notifyDataSetChanged();
+                Hrev.setAdapter(revad);
+                Hrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
             }else{
-                Srev.setVisibility(View.GONE);
+                Hrev.setVisibility(View.GONE);
             }
         }
 
     }
+
     public static Review[] parseReviews(SoapObject soap)
     {
         Review[] reviews = new Review[soap.getPropertyCount()];
@@ -201,7 +192,8 @@ public class Show_detail extends AppCompatActivity {
 
         try {
             SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-            Request.addProperty("arg0" ,Sid);
+
+            Request.addProperty("arg0" ,Hid);
 
             SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.setOutputSoapObject(Request);

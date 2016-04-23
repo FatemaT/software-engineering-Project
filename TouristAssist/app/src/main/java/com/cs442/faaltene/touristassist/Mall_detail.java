@@ -2,6 +2,7 @@ package com.cs442.faaltene.touristassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -53,7 +54,8 @@ public class Mall_detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        reviews = (Review[])intent.getSerializableExtra("reviews");
+        //reviews = (Review[])intent.getSerializableExtra("reviews");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
         mname = (TextView)findViewById(R.id.mname);
         mad = (TextView)findViewById(R.id.mad);
         minfo = (TextView)findViewById(R.id.minfo);
@@ -69,16 +71,23 @@ public class Mall_detail extends AppCompatActivity {
         mid2 = Integer.parseInt(mid);
         rev = new ArrayList<Review>();
         mname = (TextView) findViewById(R.id.mname);
+        mname.setTypeface(tf);
         mname.setText(name);
         mad = (TextView) findViewById(R.id.mad);
+        mad.setTypeface(tf);
         mad.setText(add);
         minfo = (TextView) findViewById(R.id.minfo);
+        minfo.setTypeface(tf);
         minfo.setText(info);
         mb = (TextView) findViewById(R.id.mB);
+        mb.setTypeface(tf);
         mb.setText(brand);
         ms = (TextView) findViewById(R.id.mS);
+        ms.setTypeface(tf);
         ms.setText(store);
         mrev = (ListView)findViewById(R.id.mrev);
+        AsyncCallWS task = new AsyncCallWS();
+        task.execute();
 
 
 
@@ -102,9 +111,8 @@ public class Mall_detail extends AppCompatActivity {
             //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
-                if(reviews[i].getEntityId().equalsIgnoreCase(mid)){
-                    rev.add(reviews[i]);
-                }
+                rev.add(reviews[i]);
+
             }
             //retrieveCity();
             return null;
@@ -125,11 +133,13 @@ public class Mall_detail extends AppCompatActivity {
             // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
             if (!rev.isEmpty()){
-                mrev.setAdapter(new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
+                mrev.setVisibility(View.VISIBLE);
+                revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = null;
+
                         if (v == null) {
                             if (Mall_detail.this != null) {
                                 LayoutInflater vi = (LayoutInflater) Mall_detail.this
@@ -148,7 +158,9 @@ public class Mall_detail extends AppCompatActivity {
                     }
 
 
-                });
+                };
+                mrev.setAdapter(revad);
+                revad.notifyDataSetChanged();
 
             }else{
                 mrev.setVisibility(View.GONE);

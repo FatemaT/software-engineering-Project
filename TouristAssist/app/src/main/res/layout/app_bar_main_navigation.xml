@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/navbackground"
     tools:context="com.cs442.faaltene.touristassist.MainNavigation">
 
     <android.support.design.widget.AppBarLayout
@@ -20,7 +21,11 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/content_main_navigation" />
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

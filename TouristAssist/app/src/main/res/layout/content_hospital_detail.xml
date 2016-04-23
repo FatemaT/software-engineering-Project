@@ -14,29 +14,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hname"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hospital Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/had"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hospital Address"
         android:layout_below="@+id/hname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hinfo"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hospital Info"
         android:layout_below="@+id/had"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hSpectv"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Hospital Specializations"
         android:layout_below="@+id/hinfo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hSpec"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
         android:text="Hospital Specializations"
         android:layout_below="@+id/hSpectv"/>
     <LinearLayout

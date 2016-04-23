@@ -10,48 +10,32 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.cs442.faaltene.touristassist.Show_detail"
-    tools:showIn="@layout/activity_show_detail">
+    tools:context="com.cs442.faaltene.touristassist.Hotel_detail"
+    tools:showIn="@layout/activity_hotel_detail">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sname"
         android:textSize="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Show Time Name"/>
+        android:id="@+id/hname"
+        android:text="Hotel Name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sad"
+        android:id="@+id/had"
         android:textSize="15dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Show Time Address"
-        android:layout_below="@+id/sname"/>
+        android:text="Hotel Address"
+        android:layout_below="@+id/hname"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sinfo"
+        android:id="@+id/hinfo"
         android:textSize="15dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Show Time Info"
-        android:layout_below="@+id/sad"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sdur"
-        android:textSize="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Show Time Duration"
-        android:layout_below="@+id/sinfo"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sshows"
-        android:textSize="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Show Time Shows"
-        android:layout_below="@+id/sdur"/>
+        android:text="Hotel Info"
+        android:layout_below="@+id/had"/>
 
 
 
@@ -59,12 +43,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rlistlay"
-        android:layout_below="@id/sshows"
+        android:layout_below="@id/hinfo"
         android:layout_marginTop="40dp">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="403dp"
-            android:id="@+id/srev"></ListView>
+            android:id="@+id/hrev"></ListView>
     </LinearLayout>
 
 
