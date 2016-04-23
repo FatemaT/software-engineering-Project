@@ -50,11 +50,17 @@
         android:text="Bar Disco"
         android:layout_below="@+id/bDiscotv"/>
 
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_add_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bDisco"
+        android:text="Add Review" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/blistlay"
-        android:layout_below="@id/bDisco"
+        android:layout_below="@id/button_add_review"
         android:layout_marginTop="40dp">
         <ListView
             android:layout_width="wrap_content"

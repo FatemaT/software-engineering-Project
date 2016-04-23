@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -109,6 +110,8 @@ public class Hospital_detail extends AppCompatActivity {
 
     private String rev_Text = "";
     private String rev_Score = "";
+    boolean result = false;
+
     private void showReviewDialog (String previousInput) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("New Review");
@@ -187,16 +190,12 @@ public class Hospital_detail extends AppCompatActivity {
     }
 
     public void onReviewRequestError() {
-        Context context = getApplicationContext();
-        CharSequence text = "Ops! Something went wrong at posting your review.";
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Log.i("Add review", "Request Error");
     }
 
     public void sendReview () {
         String SOAP_ACTION = "http://main.ta.se.cs.com/postReview";
-        String METHOD_NAME = "postReviews";
+        String METHOD_NAME = "postReview";
         String NAMESPACE = "http://main.ta.se.cs.com/";
         String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
 
@@ -214,13 +213,25 @@ public class Hospital_detail extends AppCompatActivity {
 
             transport.call(SOAP_ACTION, soapEnvelope);
 
-            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
-            String re = soapObject.getProperty(0).toString();
+            SoapPrimitive soapPrimitive = (SoapPrimitive) soapEnvelope.getResponse();
+            String re = soapPrimitive.toString();
 
-            Log.i(TAG, "Result : " + re);
+            Log.i(TAG, "Result primitive: " + re);
+            result = Boolean.valueOf(re);
+
+
         } catch (Exception ex) {
             Log.e(TAG, "Error: " + ex.getMessage());
             onReviewRequestError();
+        }
+    }
+
+    private void addNewReviewToList () {
+        Log.i("Enters add new","1");
+        if (result) {
+            if (revad!=null) revad.clear();
+            AsyncCallWS task = new AsyncCallWS ();
+            task.execute();
         }
     }
 
@@ -242,9 +253,7 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            /* Reload list of reviews */
-            AsyncCallWS task = new AsyncCallWS();
-            task.execute();
+            addNewReviewToList();
         }
 
     }

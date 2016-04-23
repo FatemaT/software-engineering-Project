@@ -48,11 +48,17 @@
         android:id="@+id/aFee"
         android:text="Attraction Fee"
         android:layout_below="@+id/aFeetv"/>
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_add_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aFee"
+        android:text="Add Review" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/alistlay"
-        android:layout_below="@id/aFee"
+        android:layout_below="@id/button_add_review"
         android:layout_marginTop="40dp">
         <ListView
             android:layout_width="wrap_content"
