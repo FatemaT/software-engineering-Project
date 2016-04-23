@@ -85,4 +85,10 @@ public class ResponseBuilder {
         showtimeResponse.setShowtimes(genResponse.getShowtimes(cityId));
         return showtimeResponse; 
     }
+    
+    public Boolean postReview(String entityId, String reviewScore, String reviewText){
+        Boolean response = Boolean.FALSE;
+        response = genResponse.postReview(entityId, reviewScore, reviewText);
+        return response; 
+        }
 }

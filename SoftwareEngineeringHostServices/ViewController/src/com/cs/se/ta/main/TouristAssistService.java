@@ -41,6 +41,7 @@ public class TouristAssistService {
 
     @WebMethod
     public AttractionResponse getAttractions(@WebParam(name = "arg0") String cityId) {
+        System.out.println(cityId);
         ResponseBuilder responseBuilder = new ResponseBuilder();
         return responseBuilder.getAttractions(cityId);
     }
@@ -77,6 +78,7 @@ public class TouristAssistService {
 
     @WebMethod
     public ReviewResponse getReviews(@WebParam(name = "arg0") String entityId) {
+        System.out.println(entityId);
         ResponseBuilder responseBuilder = new ResponseBuilder();
         return responseBuilder.getReviews(entityId);
     }
@@ -86,4 +88,11 @@ public class TouristAssistService {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         return responseBuilder.getShowtimes(cityId);
     }
+    
+    @WebMethod
+    public Boolean postReview(@WebParam(name = "arg0")String entityId, @WebParam(name = "arg1")String reviewScore, @WebParam(name = "arg2")String reviewText){
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Boolean postReviewResponse = responseBuilder.postReview(entityId, reviewScore, reviewText);
+        return postReviewResponse;
+        }
 }

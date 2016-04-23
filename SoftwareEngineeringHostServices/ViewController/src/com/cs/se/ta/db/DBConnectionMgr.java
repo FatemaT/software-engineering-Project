@@ -37,10 +37,28 @@ public class DBConnectionMgr {
         return sqlObjects;
     }
     
+    public static SQLAggregatedConnectionObjects insertOrUpdateObjectsUsingQuery(String query, SQLAggregatedConnectionObjects sqlObjects) {
+        try {
+            Class.forName(JDBC_DRIVER);
+            
+            sqlObjects.setConnection(DriverManager.getConnection(DB_URL, USER, PASS));
+            sqlObjects.setStatement(sqlObjects.getConnection().createStatement());
+            
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sqlObjects;
+    }
+    
     public static void closeConnectionObjects(SQLAggregatedConnectionObjects sqlObjects) throws SQLException {
-        sqlObjects.getConnection().close();
-        sqlObjects.getResultSet().close();
-        sqlObjects.getStatement().close();
+        if (sqlObjects.getConnection() != null)
+            sqlObjects.getConnection().close();
+        if (sqlObjects.getResultSet() != null)
+            sqlObjects.getResultSet().close();
+        if (sqlObjects.getStatement() != null)
+            sqlObjects.getStatement().close();
     }
 
 }
