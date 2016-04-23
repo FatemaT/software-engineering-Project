@@ -106,7 +106,7 @@ public class museum_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((MainNavigation) getActivity()).setActionBarTitle("Museums");
+        ((MainNavigation) getActivity()).setActionBarTitle("Attractions");
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         rootView = inflater.inflate(R.layout.fragment_museum_frag, container, false);
         attra = new ArrayList<String>();

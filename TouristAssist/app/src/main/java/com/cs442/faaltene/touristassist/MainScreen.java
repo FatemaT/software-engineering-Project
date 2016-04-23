@@ -118,9 +118,13 @@ public class MainScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if (city != null) {
-                i.putExtra("city", city);
-                startActivity(i);
+            if(city!=null) {
+                if (getCel.equalsIgnoreCase(city.getCityName())) {
+                    i.putExtra("city", city);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(MainScreen.this, "Please enter a correct city name", Toast.LENGTH_SHORT).show();
+                }
             }else {
                 Toast.makeText(MainScreen.this, "Please enter a correct city name", Toast.LENGTH_SHORT).show();
             }
