@@ -98,7 +98,13 @@ public class MainNavigation extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main_navigation, menu);
         return true;
     }
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -110,6 +116,7 @@ public class MainNavigation extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

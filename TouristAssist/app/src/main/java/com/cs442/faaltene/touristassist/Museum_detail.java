@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -399,5 +400,12 @@ public class Museum_detail extends AppCompatActivity {
     }
 
     /* End of review zone */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
 
 }

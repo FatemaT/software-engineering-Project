@@ -148,6 +148,13 @@ public class MainScreen extends AppCompatActivity {
 
         return city;
     }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
     public void retrieveCity() {
         String SOAP_ACTION = "http://main.ta.se.cs.com/getCityFromCityName";
         String METHOD_NAME = "getCityFromCityName";

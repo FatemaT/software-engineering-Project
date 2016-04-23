@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -359,7 +360,7 @@ public class Hotel_detail extends AppCompatActivity {
     }
 
     private void addNewReviewToList () {
-        Log.i("Enters add new","1");
+        Log.i("Enters add new", "1");
         if (result) {
             if (revad!=null) revad.clear();
             AsyncCallWS task = new AsyncCallWS ();
@@ -391,4 +392,11 @@ public class Hotel_detail extends AppCompatActivity {
     }
 
     /* End of review zone */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
 }
