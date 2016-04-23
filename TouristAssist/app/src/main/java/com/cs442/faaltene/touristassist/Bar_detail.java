@@ -117,13 +117,7 @@ public class Bar_detail extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item= menu.findItem(R.id.action_settings);
-        item.setVisible(false);
-        super.onPrepareOptionsMenu(menu);
-        return true;
-    }
+
 
     private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
 

@@ -118,6 +118,7 @@ public class Restaurant_detail extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -406,11 +407,5 @@ public class Restaurant_detail extends AppCompatActivity {
     }
 
     /* End of review zone */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item= menu.findItem(R.id.action_settings);
-        item.setVisible(false);
-        super.onPrepareOptionsMenu(menu);
-        return true;
-    }
+
 }
