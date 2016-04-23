@@ -49,6 +49,7 @@
         android:textColor="@color/colorPrimary"
         android:text="Bar Disco"
         android:layout_below="@+id/bDiscotv"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

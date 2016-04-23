@@ -10,13 +10,14 @@
     tools:showIn="@layout/activity_hospital_detail"
     tools:context="com.cs442.faaltene.touristassist.Hospital_detail">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hname"
         android:textSize="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Hospital Name"/>
+        android:text="Hospital Name" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,11 +50,17 @@
         android:textColor="@color/colorPrimary"
         android:text="Hospital Specializations"
         android:layout_below="@+id/hSpectv"/>
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_add_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hSpec"
+        android:text="Add Review" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hlistlay"
-        android:layout_below="@id/hSpec"
+        android:layout_below="@id/button_add_review"
         android:layout_marginTop="40dp">
         <ListView
             android:layout_width="wrap_content"

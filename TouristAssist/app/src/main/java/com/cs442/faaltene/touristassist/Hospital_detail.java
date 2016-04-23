@@ -1,6 +1,8 @@
 package com.cs442.faaltene.touristassist;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -9,14 +11,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -84,7 +91,165 @@ public class Hospital_detail extends AppCompatActivity {
         //hrev = (ListView)findViewById(R.id.hrev);
         AsyncCallWS task = new AsyncCallWS();
         task.execute();
+        //New review button
+        Button button = (Button) findViewById(R.id.button_add_review);
+        if (button != null) {
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Log.i("Button", "new review pressed");
+                    showReviewDialog("");
+                }
+            });
+        }
     }
+
+    /*
+        New review zone
+     */
+
+    private String rev_Text = "";
+    private String rev_Score = "";
+    private void showReviewDialog (String previousInput) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("New Review");
+
+        Context context = builder.getContext();
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText scoreBox = new EditText(context);
+        scoreBox.setHint("Score 0 up to 5");
+        layout.addView(scoreBox);
+
+        final EditText descriptionBox = new EditText(context);
+        descriptionBox.setText(previousInput);
+        descriptionBox.setHint("Description");
+        layout.addView(descriptionBox);
+
+        builder.setView(layout);
+
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                rev_Score = scoreBox.getText().toString();
+                rev_Text = descriptionBox.getText().toString();
+                if (rev_Score.matches("[\\d]")) {
+                    int score = Integer.parseInt(rev_Score);
+                    if (score<0 || score>5) {
+                        showScoreError();
+                        showReviewDialog(rev_Text);
+                    }
+                    else if (!rev_Text.isEmpty())
+                        onReviewSuccess();
+                    else {
+                        showEmptyReviewError();
+                        showReviewDialog(rev_Text);
+                    }
+                } else {
+                    showScoreError();
+                    showReviewDialog(rev_Text);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
+
+    public void showScoreError () {
+        Log.i("Regex","not accepted!!");
+        Context context = getApplicationContext();
+        CharSequence text = "The score input has to be a number between 0 and 5.";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void showEmptyReviewError() {
+        Log.i("Review","is empty!!");
+        Context context = getApplicationContext();
+        CharSequence text = "The review description cannot be empty.";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onReviewSuccess() {
+        Log.i("Regex", "accepted");
+        AsyncCallWSReview task = new AsyncCallWSReview ();
+        task.execute();
+    }
+
+    public void onReviewRequestError() {
+        Context context = getApplicationContext();
+        CharSequence text = "Ops! Something went wrong at posting your review.";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void sendReview () {
+        String SOAP_ACTION = "http://main.ta.se.cs.com/postReview";
+        String METHOD_NAME = "postReviews";
+        String NAMESPACE = "http://main.ta.se.cs.com/";
+        String URL = "http://10.0.2.2:7101/SoftwareEngineeringHostServices-ViewController-context-root/TouristAssistServicePort?wsdl";
+
+        try {
+            SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+            //           hid = hid2+"";
+            Request.addProperty("arg0" ,hid);
+            Request.addProperty("arg1" ,rev_Score);
+            Request.addProperty("arg2", rev_Text);
+
+            SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            soapEnvelope.setOutputSoapObject(Request);
+
+            HttpTransportSE transport = new HttpTransportSE(URL);
+
+            transport.call(SOAP_ACTION, soapEnvelope);
+
+            SoapObject soapObject = (SoapObject) soapEnvelope.getResponse();
+            String re = soapObject.getProperty(0).toString();
+
+            Log.i(TAG, "Result : " + re);
+        } catch (Exception ex) {
+            Log.e(TAG, "Error: " + ex.getMessage());
+            onReviewRequestError();
+        }
+    }
+
+    private class AsyncCallWSReview extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            Log.i(TAG, "onPreExecute");
+            //hrev = (ListView)findViewById(R.id.hrev);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.i(TAG, "doInBackground");
+            sendReview();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            Log.i(TAG, "onPostExecute");
+            /* Reload list of reviews */
+            AsyncCallWS task = new AsyncCallWS();
+            task.execute();
+        }
+
+    }
+
+    /* End of review zone */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -107,13 +272,6 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Log.i(TAG, "doInBackground");
-            //retrieveShowtimes();
-            //retrieveHotels();
-            //retrieveRestaurants();
-            //retrieveMalls();
-            //retrieveHospitals();
-            //retrieveClubs();
-            //retrieveAttractions();
             retrieveReviews();
             for(int i = 0; i<reviews.length; i++){
                 rev.add(reviews[i]);
@@ -125,21 +283,8 @@ public class Hospital_detail extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-
-            //i.putExtra("city", city);
-            //i.putExtra("hotels", hotels);
-            //i.putExtra("hospitals",hospitals);
-            //i.putExtra("showtimes",showtimes);
-            //i.putExtra("restaurants", restaurants);
-            //i.putExtra("malls",malls);
-            //i.putExtra("clubs",clubs);
-            //i.putExtra("reviews",reviews);
-            //startActivity(i);
-            // Toast.makeText(MainActivity.this, "Response" + re, Toast.LENGTH_LONG).show();
             mContext = getApplicationContext();
-            Log.i("Enters","1");
             if (!rev.isEmpty()){
-                Log.i("Enters","2");
                 hrev.setVisibility(View.VISIBLE);
                 revad = new ArrayAdapter<Review>(mContext, R.layout.list_item, rev) {
 
@@ -220,5 +365,7 @@ public class Hospital_detail extends AppCompatActivity {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
+
+
 
 }
