@@ -77,7 +77,8 @@
         android:id="@+id/button_add_review"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:theme="@style/MyButton"
-        android:textSize="20dp"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/mS"
         android:textColor="@color/colorPrimary" />
 
