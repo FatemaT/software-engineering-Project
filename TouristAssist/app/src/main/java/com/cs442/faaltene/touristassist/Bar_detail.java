@@ -63,6 +63,7 @@ public class Bar_detail extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Typeface tf = Typeface.createFromAsset(getAssets(), "DroidSansMono.ttf");
+
         Intent intent = getIntent();
         reviews = (Review[])intent.getSerializableExtra("reviews");
         bname = (TextView)findViewById(R.id.bname);
@@ -92,6 +93,8 @@ public class Bar_detail extends AppCompatActivity {
         brev = (ListView)findViewById(R.id.brev);
         //New review button
         Button button = (Button) findViewById(R.id.button_add_review);
+        Typeface btf = Typeface.createFromAsset(getAssets(), "green avocado.ttf");
+        button.setTypeface(btf);
         if (button != null) {
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

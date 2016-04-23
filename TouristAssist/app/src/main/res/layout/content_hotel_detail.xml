@@ -37,12 +37,15 @@
         android:text="Hotel Info"
         android:layout_below="@+id/had"/>
 
-    <Button xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/button_add_review"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Add Review"
+        android:id="@+id/button_add_review"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:theme="@style/MyButton"
         android:layout_below="@id/hinfo"
-        android:text="Add Review" />
+        android:textColor="@color/colorPrimary" />
 
     <LinearLayout
         android:layout_width="wrap_content"

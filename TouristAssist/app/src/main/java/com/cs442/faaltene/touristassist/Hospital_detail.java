@@ -94,6 +94,8 @@ public class Hospital_detail extends AppCompatActivity {
         task.execute();
         //New review button
         Button button = (Button) findViewById(R.id.button_add_review);
+        Typeface btf = Typeface.createFromAsset(getAssets(), "green avocado.ttf");
+        button.setTypeface(btf);
         if (button != null) {
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
