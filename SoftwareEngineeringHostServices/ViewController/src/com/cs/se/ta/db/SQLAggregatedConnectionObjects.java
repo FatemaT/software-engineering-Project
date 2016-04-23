@@ -5,6 +5,16 @@ public class SQLAggregatedConnectionObjects {
     private ResultSet resultSet;
     private Connection connection;
     private Statement statement;
+    private PreparedStatement preparedStatement;
+
+    public void setPreparedStatement(PreparedStatement preparedStatement) {
+        this.preparedStatement = preparedStatement;
+    }
+
+    public PreparedStatement getPreparedStatement() {
+        return preparedStatement;
+    }
+
     public SQLAggregatedConnectionObjects() {
         super();
     }
